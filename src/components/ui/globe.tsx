@@ -5,7 +5,7 @@ export function Globe({ className }: { className?: string }) {
     <div className={cn("relative w-full h-full flex items-center justify-center", className)}>
       <svg
         viewBox="0 0 400 400"
-        className="w-full h-full max-w-[360px] max-h-[360px]"
+        className="w-full h-full max-w-[480px] max-h-[480px]"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>

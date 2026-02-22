@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { WebGLShader } from "@/components/ui/web-gl-shader";
+import { GradientButton } from "@/components/ui/gradient-button";
 
 const HeroSection = ({ onStart }: { onStart: () => void }) => {
   return (
@@ -33,12 +34,12 @@ const HeroSection = ({ onStart }: { onStart: () => void }) => {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <button onClick={onStart} className="btn-primary text-sm tracking-wide">
+          <GradientButton onClick={onStart} className="text-sm tracking-wide">
             开始咨询
-          </button>
-          <button className="btn-secondary text-sm tracking-wide">
+          </GradientButton>
+          <GradientButton variant="variant" className="text-sm tracking-wide">
             查看案例
-          </button>
+          </GradientButton>
         </motion.div>
       </div>
     </section>

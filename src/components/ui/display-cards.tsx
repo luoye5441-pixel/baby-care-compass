@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { Sparkles } from "lucide-react";
 
 interface DisplayCardProps {
   className?: string;
@@ -13,26 +12,19 @@ interface DisplayCardProps {
 
 function DisplayCard({
   className,
-  icon = <Sparkles className="size-4 text-blue-300" />,
   title = "Featured",
   description = "Discover amazing content",
   date = "Just now",
-  iconClassName = "text-blue-500",
-  titleClassName = "text-blue-500",
+  titleClassName = "text-primary",
 }: DisplayCardProps) {
   return (
     <div
       className={cn(
-        "relative flex h-40 w-[26rem] -skew-y-[8deg] select-none flex-col justify-between rounded-xl border border-border bg-muted/70 px-5 py-4 transition-all duration-700 ease-out overflow-hidden [&>*]:flex [&>*]:items-center [&>*]:gap-2",
+        "relative flex h-40 w-[26rem] -skew-y-[8deg] select-none flex-col justify-between rounded-xl border border-border bg-muted/70 px-5 py-4 transition-all duration-700 ease-out overflow-hidden",
         className
       )}
     >
-      <div>
-        <span className={cn("relative inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-muted", iconClassName)}>
-          {icon}
-        </span>
-        <p className={cn("text-lg font-bold", titleClassName)}>{title}</p>
-      </div>
+      <p className={cn("text-lg font-bold", titleClassName)}>{title}</p>
       <p className="text-sm leading-relaxed line-clamp-2">{description}</p>
       <p className="text-sm text-muted-foreground">{date}</p>
     </div>

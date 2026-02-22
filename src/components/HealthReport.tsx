@@ -8,18 +8,18 @@ interface Props {
 }
 
 const ScoreRing = ({ score, label }: { score: number; label: string }) => {
-  const color = score >= 85 ? "hsl(var(--sage))" : score >= 60 ? "hsl(var(--honey))" : "hsl(var(--destructive))";
-  const circumference = 2 * Math.PI * 54;
+  const circumference = 2 * Math.PI * 52;
   const offset = circumference - (score / 100) * circumference;
+  const color = score >= 85 ? "hsl(var(--mint))" : score >= 60 ? "hsl(var(--apricot))" : "hsl(var(--destructive))";
 
   return (
-    <div className="flex flex-col items-center">
-      <svg width="140" height="140" className="transform -rotate-90">
-        <circle cx="70" cy="70" r="54" stroke="hsl(var(--muted))" strokeWidth="10" fill="none" />
+    <div className="relative w-32 h-32">
+      <svg width="128" height="128" className="transform -rotate-90">
+        <circle cx="64" cy="64" r="52" stroke="hsl(var(--muted))" strokeWidth="8" fill="none" />
         <motion.circle
-          cx="70" cy="70" r="54"
+          cx="64" cy="64" r="52"
           stroke={color}
-          strokeWidth="10"
+          strokeWidth="8"
           fill="none"
           strokeLinecap="round"
           initial={{ strokeDashoffset: circumference }}
@@ -28,23 +28,20 @@ const ScoreRing = ({ score, label }: { score: number; label: string }) => {
           strokeDasharray={circumference}
         />
       </svg>
-      <div className="absolute mt-10 flex flex-col items-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
         <span className="text-3xl font-bold">{score}</span>
-        <span className="text-sm text-muted-foreground">{label}</span>
+        <span className="text-xs text-muted-foreground">{label}</span>
       </div>
     </div>
   );
 };
 
-const StatusBadge = ({ label, value }: { label: string; value: string }) => {
-  const isNormal = value === "正常";
-  return (
-    <div className={`rounded-2xl p-4 text-center ${isNormal ? "gradient-sage" : "gradient-peach"}`}>
-      <div className="text-sm text-muted-foreground mb-1">{label}</div>
-      <div className="text-lg font-semibold">{value}</div>
-    </div>
-  );
-};
+const MetricCard = ({ label, value, normal }: { label: string; value: string; normal: boolean }) => (
+  <div className={`rounded-2xl p-4 text-center ${normal ? "gradient-mint" : "gradient-coral"}`}>
+    <div className="text-xs text-muted-foreground mb-1">{label}</div>
+    <div className="text-base font-semibold">{value}</div>
+  </div>
+);
 
 const HealthReportView = ({ data, report }: Props) => {
   return (
@@ -52,64 +49,70 @@ const HealthReportView = ({ data, report }: Props) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="section-padding"
+      className="section-cool py-16 md:py-24 px-6"
     >
-      <div className="container mx-auto max-w-3xl">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold mb-2">{data.name} 的健康报告</h2>
-          <p className="text-muted-foreground">
-            {data.ageYears}岁{data.ageMonths > 0 ? `${data.ageMonths}个月` : ""} · {data.gender === "male" ? "男宝" : "女宝"}
+      <div className="max-w-2xl mx-auto">
+        <div className="text-center mb-8">
+          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-mint-light text-primary mb-3">
+            评估报告
+          </span>
+          <h2 className="text-2xl font-bold mb-1">{data.name} 的健康报告</h2>
+          <p className="text-sm text-muted-foreground">
+            {data.ageYears}岁{data.ageMonths > 0 ? `${data.ageMonths}个月` : ""} · {data.gender === "male" ? "男宝" : "女宝"} · {data.height}cm · {data.weight}kg
           </p>
         </div>
 
         {/* Score */}
-        <div className="glass-card rounded-3xl p-8 mb-6 flex flex-col items-center relative">
+        <div className="card-elevated p-8 flex flex-col items-center mb-5">
           <ScoreRing score={report.overallScore} label={report.overallLabel} />
+          <p className="text-sm text-muted-foreground mt-4">综合健康评分</p>
         </div>
 
-        {/* Status grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <StatusBadge label="身高" value={report.heightStatus} />
-          <StatusBadge label="体重" value={report.weightStatus} />
-          <StatusBadge label="BMI" value={report.bmiStatus} />
-          <div className="rounded-2xl p-4 text-center bg-muted">
-            <div className="text-sm text-muted-foreground mb-1">BMI 值</div>
-            <div className="text-lg font-semibold">{report.bmi.toFixed(1)}</div>
+        {/* Metrics */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+          <MetricCard label="身高评估" value={report.heightStatus} normal={report.heightStatus === "正常"} />
+          <MetricCard label="体重评估" value={report.weightStatus} normal={report.weightStatus === "正常"} />
+          <MetricCard label="BMI状态" value={report.bmiStatus} normal={report.bmiStatus === "正常"} />
+          <div className="rounded-2xl p-4 text-center bg-card border border-border/40">
+            <div className="text-xs text-muted-foreground mb-1">BMI 值</div>
+            <div className="text-base font-semibold">{report.bmi.toFixed(1)}</div>
           </div>
         </div>
 
         {/* Suggestions */}
-        <div className="glass-card rounded-3xl p-8 mb-6">
-          <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            💡 健康建议
+        <div className="card-elevated p-6 md:p-7 mb-5">
+          <h3 className="text-base font-semibold mb-4 flex items-center gap-2">
+            <span className="w-7 h-7 rounded-lg bg-mint-light flex items-center justify-center text-sm">💡</span>
+            健康建议
           </h3>
-          <ul className="space-y-3">
+          <div className="space-y-3">
             {report.suggestions.map((s, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-sage-light flex items-center justify-center text-xs font-medium shrink-0 mt-0.5">
+              <div key={i} className="flex items-start gap-3 text-sm">
+                <span className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
                   {i + 1}
                 </span>
-                <span className="text-foreground/80">{s}</span>
-              </li>
+                <span className="text-foreground/75 leading-relaxed">{s}</span>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
 
         {/* Nutrition */}
-        <div className="glass-card rounded-3xl p-8">
-          <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            🥗 营养建议
+        <div className="card-elevated p-6 md:p-7">
+          <h3 className="text-base font-semibold mb-4 flex items-center gap-2">
+            <span className="w-7 h-7 rounded-lg bg-coral-light flex items-center justify-center text-sm">🥗</span>
+            营养方案
           </h3>
-          <ul className="space-y-3">
+          <div className="space-y-3">
             {report.nutritionTips.map((t, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-peach-light flex items-center justify-center text-xs font-medium shrink-0 mt-0.5">
+              <div key={i} className="flex items-start gap-3 text-sm">
+                <span className="w-5 h-5 rounded-full bg-secondary/15 text-secondary flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
                   {i + 1}
                 </span>
-                <span className="text-foreground/80">{t}</span>
-              </li>
+                <span className="text-foreground/75 leading-relaxed">{t}</span>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </motion.section>

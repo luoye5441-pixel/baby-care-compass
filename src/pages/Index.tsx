@@ -9,7 +9,7 @@ import { generateReport, type HealthReport } from "@/lib/healthUtils";
 
 const Index = () => {
   const [report, setReport] = useState<{ data: BabyData; report: HealthReport } | null>(null);
-  const formRef = useRef<HTMLDivElement>(null);
+  const reportRef = useRef<HTMLDivElement>(null);
 
   const handleStart = () => {
     document.getElementById("health-form")?.scrollIntoView({ behavior: "smooth" });
@@ -18,7 +18,9 @@ const Index = () => {
   const handleSubmit = (data: BabyData) => {
     const r = generateReport(data);
     setReport({ data, report: r });
-    window.scrollTo({ top: (formRef.current?.offsetTop ?? 0) + 400, behavior: "smooth" });
+    setTimeout(() => {
+      reportRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
   };
 
   return (
@@ -26,19 +28,21 @@ const Index = () => {
       <Navbar />
       <HeroSection onStart={handleStart} />
       <FeaturesGrid />
-      <div ref={formRef}>
-        <HealthForm onSubmit={handleSubmit} />
+      <HealthForm onSubmit={handleSubmit} />
+      <div ref={reportRef}>
+        {report && <HealthReportView data={report.data} report={report.report} />}
       </div>
-      {report && <HealthReportView data={report.data} report={report.report} />}
-      <div id="allergens">
-        <AllergenReminder />
-      </div>
+      <AllergenReminder />
 
       {/* Footer */}
-      <footer className="section-padding border-t border-border/50">
-        <div className="container mx-auto text-center text-sm text-muted-foreground">
-          <p>© 2026 宝贝健康 · 守护每一步成长</p>
-          <p className="mt-1 text-xs">数据仅供参考，如有健康问题请咨询专业医生</p>
+      <footer className="py-12 px-6 border-t border-border/40">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-sm">🌱</span>
+            <span className="font-semibold text-sm">宝贝健康</span>
+          </div>
+          <p className="text-xs text-muted-foreground mb-1">© 2026 宝贝健康 · 守护每一步成长</p>
+          <p className="text-xs text-muted-foreground/60">数据仅供参考，如有健康问题请咨询专业医生</p>
         </div>
       </footer>
     </div>

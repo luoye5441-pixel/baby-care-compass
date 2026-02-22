@@ -75,29 +75,29 @@ export function SplineRobot() {
       <div className="min-h-[400px] md:h-[560px] relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 md:left-2/3 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[600px] h-[400px] md:h-[600px] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.08)_0%,rgba(99,102,241,0.04)_40%,transparent_70%)]" />
         <div className="flex flex-col md:flex-row h-full">
-          <div className="flex-1 p-8 md:p-16 relative z-10 flex flex-col justify-center">
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-gradient">
+          <div className="md:w-[40%] p-8 md:p-12 relative z-10 flex flex-col justify-center">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-gradient">
               AI+专业团队驱动
             </h2>
-            <p className="mt-4 md:mt-6 text-muted-foreground max-w-lg text-base md:text-lg leading-relaxed">
+            <p className="mt-3 md:mt-4 text-muted-foreground max-w-sm text-sm md:text-base leading-relaxed">
               全球来自 20 个不同国家的人工团队，结合 AI 智能分析，为品牌提供跨文化、全方位的策略支持。
             </p>
-            <div className="mt-8 grid grid-cols-3 gap-6 max-w-md">
+            <div className="mt-6 grid grid-cols-3 gap-4 max-w-xs">
               <div>
-                <p className="text-2xl md:text-3xl font-bold text-foreground">20+</p>
+                <p className="text-xl md:text-2xl font-bold text-foreground">20+</p>
                 <p className="text-xs text-muted-foreground mt-1">覆盖国家</p>
               </div>
               <div>
-                <p className="text-2xl md:text-3xl font-bold text-foreground">500+</p>
+                <p className="text-xl md:text-2xl font-bold text-foreground">500+</p>
                 <p className="text-xs text-muted-foreground mt-1">服务品牌</p>
               </div>
               <div>
-                <p className="text-2xl md:text-3xl font-bold text-foreground">98%</p>
+                <p className="text-xl md:text-2xl font-bold text-foreground">98%</p>
                 <p className="text-xs text-muted-foreground mt-1">客户满意度</p>
               </div>
             </div>
           </div>
-          <div className="flex-1 relative flex items-center justify-center min-h-[250px]">
+          <div className="md:w-[60%] relative flex items-center justify-center min-h-[300px]">
             <Globe className="w-full h-full" />
           </div>
         </div>

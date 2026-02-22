@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Search, Target, PenTool, Send } from "lucide-react";
 import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
+import { AIVoiceInput } from "@/components/ui/ai-voice-input";
 
 const timelineData = [
   {
@@ -52,6 +53,21 @@ const timelineData = [
 const FeaturesGrid = () => (
   <section id="process" className="bg-background py-24 md:py-32">
     <div className="max-w-5xl mx-auto px-6">
+      {/* Voice Input */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="flex justify-center mb-8"
+      >
+        <AIVoiceInput
+          demoMode
+          visualizerBars={32}
+          onStart={() => console.log("Recording started")}
+          onStop={(d) => console.log("Recording stopped:", d)}
+        />
+      </motion.div>
+
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}

@@ -16,162 +16,136 @@ interface Props {
 }
 
 const HealthForm = ({ onSubmit }: Props) => {
-  const [form, setForm] = useState<BabyData>({
+  const [form, setForm] = useState({
     name: "",
-    gender: "male",
-    ageYears: 1,
-    ageMonths: 0,
-    height: 75,
-    weight: 10,
-    headCircumference: 46,
+    company: "",
+    email: "",
+    phone: "",
+    budget: "10-30万",
+    needs: "",
   });
 
-  const update = (key: keyof BabyData, value: string | number) =>
+  const update = (key: string, value: string) =>
     setForm((p) => ({ ...p, [key]: value }));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(form);
+    // For now, create a dummy BabyData to maintain interface compatibility
+    const dummyData: BabyData = {
+      name: form.name,
+      gender: "male",
+      ageYears: 1,
+      ageMonths: 0,
+      height: 75,
+      weight: 10,
+      headCircumference: 46,
+    };
+    onSubmit(dummyData);
   };
 
   return (
     <motion.section
-      id="health-form"
+      id="contact"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="py-16 md:py-24 px-6"
+      className="py-24 md:py-32 px-6"
     >
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-10">
-          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-coral-light text-secondary mb-4">
-            健康评估
-          </span>
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">输入宝宝信息</h2>
-          <p className="text-muted-foreground text-sm">填写基本指标，一键生成专业健康报告</p>
+      <div className="max-w-2xl mx-auto">
+        <div className="text-center mb-12">
+          <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">
+            Contact Us
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-gradient mb-3">
+            开启品牌之旅
+          </h2>
+          <p className="text-muted-foreground text-sm">留下您的信息，我们将在24小时内与您联系</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-auto">
-          
-          {/* 宝宝昵称 - Wide */}
-          <div className="md:col-span-3 rounded-3xl border border-border bg-card p-6 hover:shadow-lg transition-shadow">
-            <label className="block text-xs font-medium text-muted-foreground mb-2">宝宝昵称</label>
-            <input
-              type="text"
-              value={form.name}
-              onChange={(e) => update("name", e.target.value)}
-              placeholder="例如：小糯米"
-              className="input-field"
-              required
-            />
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">您的姓名</label>
+              <input
+                type="text"
+                value={form.name}
+                onChange={(e) => update("name", e.target.value)}
+                placeholder="张先生 / 李女士"
+                className="input-field"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">公司名称</label>
+              <input
+                type="text"
+                value={form.company}
+                onChange={(e) => update("company", e.target.value)}
+                placeholder="您的公司"
+                className="input-field"
+              />
+            </div>
           </div>
 
-          {/* 性别 - Wide */}
-          <div className="md:col-span-3 rounded-3xl border border-border bg-card p-6 hover:shadow-lg transition-shadow">
-            <label className="block text-xs font-medium text-muted-foreground mb-2">性别</label>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { value: "male" as const, label: "男宝", bg: "bg-mint-light border-primary" },
-                { value: "female" as const, label: "女宝", bg: "bg-coral-light border-secondary" },
-              ].map((opt) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">电子邮箱</label>
+              <input
+                type="email"
+                value={form.email}
+                onChange={(e) => update("email", e.target.value)}
+                placeholder="email@company.com"
+                className="input-field"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">联系电话</label>
+              <input
+                type="tel"
+                value={form.phone}
+                onChange={(e) => update("phone", e.target.value)}
+                placeholder="138 0000 0000"
+                className="input-field"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-medium text-muted-foreground mb-2">预算范围</label>
+            <div className="grid grid-cols-3 gap-3">
+              {["10-30万", "30-80万", "80万以上"].map((opt) => (
                 <button
                   type="button"
-                  key={opt.value}
-                  onClick={() => update("gender", opt.value)}
-                  className={`py-3 rounded-2xl border-2 text-sm font-medium transition-all ${
-                    form.gender === opt.value
-                      ? opt.bg
-                      : "bg-card border-border hover:border-muted-foreground/30"
+                  key={opt}
+                  onClick={() => update("budget", opt)}
+                  className={`py-3 rounded-xl border text-sm font-medium transition-all ${
+                    form.budget === opt
+                      ? "bg-foreground text-background border-foreground"
+                      : "bg-card border-border hover:border-foreground/30"
                   }`}
                 >
-                  {opt.label}
+                  {opt}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* 年龄 */}
-          <div className="md:col-span-3 rounded-3xl border border-border bg-card p-6 hover:shadow-lg transition-shadow">
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-xs font-medium text-muted-foreground mb-2">年龄（岁）</label>
-                <select
-                  value={form.ageYears}
-                  onChange={(e) => update("ageYears", Number(e.target.value))}
-                  className="input-field"
-                >
-                  {Array.from({ length: 8 }, (_, i) => i + 1).map((y) => (
-                    <option key={y} value={y}>{y} 岁</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-muted-foreground mb-2">月龄</label>
-                <select
-                  value={form.ageMonths}
-                  onChange={(e) => update("ageMonths", Number(e.target.value))}
-                  className="input-field"
-                >
-                  {Array.from({ length: 12 }, (_, i) => i).map((m) => (
-                    <option key={m} value={m}>{m} 个月</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-
-          {/* 身高 */}
-          <div className="md:col-span-1 rounded-3xl border border-border bg-card p-6 hover:shadow-lg transition-shadow">
-            <label className="block text-xs font-medium text-muted-foreground mb-2">身高 (cm)</label>
-            <input
-              type="number"
-              step="0.1"
-              value={form.height}
-              onChange={(e) => update("height", Number(e.target.value))}
-              className="input-field"
-              min={50}
-              max={160}
-              required
+          <div>
+            <label className="block text-xs font-medium text-muted-foreground mb-2">项目需求</label>
+            <textarea
+              value={form.needs}
+              onChange={(e) => update("needs", e.target.value)}
+              placeholder="请简要描述您的品牌需求..."
+              rows={4}
+              className="input-field resize-none"
             />
           </div>
 
-          {/* 体重 */}
-          <div className="md:col-span-1 rounded-3xl border border-border bg-card p-6 hover:shadow-lg transition-shadow">
-            <label className="block text-xs font-medium text-muted-foreground mb-2">体重 (kg)</label>
-            <input
-              type="number"
-              step="0.1"
-              value={form.weight}
-              onChange={(e) => update("weight", Number(e.target.value))}
-              className="input-field"
-              min={3}
-              max={50}
-              required
-            />
-          </div>
-
-          {/* 头围 */}
-          <div className="md:col-span-1 rounded-3xl border border-border bg-card p-6 hover:shadow-lg transition-shadow">
-            <label className="block text-xs font-medium text-muted-foreground mb-2">头围 (cm)</label>
-            <input
-              type="number"
-              step="0.1"
-              value={form.headCircumference}
-              onChange={(e) => update("headCircumference", Number(e.target.value))}
-              className="input-field"
-              min={30}
-              max={60}
-              required
-            />
-          </div>
-
-          {/* 提交按钮 - Full width */}
-          <div className="md:col-span-6">
-            <button type="submit" className="btn-primary w-full text-base py-4">
-              生成健康报告
-            </button>
-          </div>
+          <button type="submit" className="btn-primary w-full text-sm py-4 mt-2">
+            提交咨询
+          </button>
         </form>
       </div>
     </motion.section>

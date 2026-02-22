@@ -1,10 +1,9 @@
 import { useState, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import BentoFeatures from "@/components/BentoFeatures";
 import FeaturesGrid from "@/components/FeaturesGrid";
 import HealthForm, { type BabyData } from "@/components/HealthForm";
-import HealthReportView from "@/components/HealthReport";
-
 import { generateReport, type HealthReport } from "@/lib/healthUtils";
 
 const Index = () => {
@@ -12,7 +11,7 @@ const Index = () => {
   const reportRef = useRef<HTMLDivElement>(null);
 
   const handleStart = () => {
-    document.getElementById("health-form")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleSubmit = (data: BabyData) => {
@@ -27,21 +26,16 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection onStart={handleStart} />
+      <BentoFeatures />
       <FeaturesGrid />
       <HealthForm onSubmit={handleSubmit} />
-      <div ref={reportRef}>
-        {report && <HealthReportView data={report.data} report={report.report} />}
-      </div>
-      
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border/40">
+      <footer className="py-16 px-6 border-t border-border/40">
         <div className="max-w-6xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <span className="font-semibold text-sm">宝贝健康</span>
-          </div>
-          <p className="text-xs text-muted-foreground mb-1">© 2026 宝贝健康 · 守护每一步成长</p>
-          <p className="text-xs text-muted-foreground/60">数据仅供参考，如有健康问题请咨询专业医生</p>
+          <span className="font-display text-lg font-semibold">品牌策略</span>
+          <p className="text-xs text-muted-foreground mt-3 mb-1">© 2026 品牌策略工作室 · 以策略驱动品牌增长</p>
+          <p className="text-xs text-muted-foreground/40">Brand Strategy Studio</p>
         </div>
       </footer>
     </div>

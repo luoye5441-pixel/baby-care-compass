@@ -1,285 +1,85 @@
-import React, { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { BarChart3, Salad, Camera, Shield, Baby, Heart } from "lucide-react"
+import { motion } from "framer-motion";
+import { Target, Palette, TrendingUp, Layers, Globe, Zap } from "lucide-react";
 
-function GrowthAnimation() {
-  const [scale, setScale] = useState(1)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setScale((prev) => (prev === 1 ? 1.3 : 1))
-    }, 2000)
-    return () => clearInterval(interval)
-  }, [])
-
-  return (
-    <div className="flex items-center justify-center h-full">
-      <motion.div
-        animate={{ scale }}
-        transition={{ duration: 0.8, ease: "easeInOut" }}
-        className="text-5xl"
-      >
-        📊
-      </motion.div>
-    </div>
-  )
-}
-
-function NutritionAnimation() {
-  const [layout, setLayout] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLayout((prev) => (prev + 1) % 3)
-    }, 2500)
-    return () => clearInterval(interval)
-  }, [])
-
-  const layouts = ["grid-cols-2", "grid-cols-3", "grid-cols-1"]
-
-  return (
-    <div className="flex items-center justify-center h-full p-4">
-      <div className={`grid ${layouts[layout]} gap-2 w-full max-w-[120px] transition-all duration-500`}>
-        {["🥦", "🥕", "🍎"].map((emoji, i) => (
-          <motion.div
-            key={i}
-            layout
-            className="bg-muted rounded-lg aspect-square flex items-center justify-center text-lg"
-          >
-            {emoji}
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function PhotoAnimation() {
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setLoading(false), 500)
-    return () => clearTimeout(timeout)
-  }, [])
-
-  return (
-    <div className="flex flex-col items-center justify-center h-full gap-2">
-      <div className="relative">
-        <AnimatePresence mode="wait">
-          {loading ? (
-            <motion.div
-              key="loading"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="w-10 h-10 rounded-full border-2 border-primary border-t-transparent animate-spin"
-            />
-          ) : (
-            <motion.div
-              key="done"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              className="text-3xl font-bold text-primary"
-            >
-              📸
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-      <span className="text-xs text-muted-foreground">AI识别</span>
-      <div className="w-full max-w-[100px] h-1.5 bg-muted rounded-full overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: "100%" }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="h-full bg-primary rounded-full"
-        />
-      </div>
-    </div>
-  )
-}
-
-function AllergenShields() {
-  const [shields, setShields] = useState([
-    { id: 1, active: false },
-    { id: 2, active: false },
-    { id: 3, active: false }
-  ])
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShields(prev => {
-        const nextIndex = prev.findIndex(s => !s.active)
-        if (nextIndex === -1) {
-          return prev.map(() => ({ id: Math.random(), active: false }))
-        }
-        return prev.map((s, i) => i === nextIndex ? { ...s, active: true } : s)
-      })
-    }, 800)
-    return () => clearInterval(interval)
-  }, [])
-
-  return (
-    <div className="flex items-center justify-center gap-3">
-      {shields.map((shield) => (
-        <motion.div
-          key={shield.id}
-          animate={{ scale: shield.active ? 1 : 0.8, opacity: shield.active ? 1 : 0.3 }}
-          className="text-primary"
-        >
-          <Shield className="size-6" />
-        </motion.div>
-      ))}
-    </div>
-  )
-}
-
-function HeartbeatAnimation() {
-  const [pulses] = useState([0, 1, 2, 3, 4])
-
-  return (
-    <div className="relative flex items-center justify-center h-full">
-      <Heart className="size-8 text-coral relative z-10" />
-      {pulses.map((pulse) => (
-        <motion.div
-          key={pulse}
-          className="absolute w-8 h-8 rounded-full border border-coral/30"
-          animate={{ scale: [1, 2.5], opacity: [0.5, 0] }}
-          transition={{ duration: 2, repeat: Infinity, delay: pulse * 0.4, ease: "easeOut" }}
-        />
-      ))}
-    </div>
-  )
-}
+const services = [
+  {
+    icon: Target,
+    title: "品牌定位",
+    description: "深度市场研究与竞品分析，精准锁定品牌核心定位与差异化优势",
+    span: "md:col-span-2 md:row-span-2",
+  },
+  {
+    icon: Palette,
+    title: "视觉识别",
+    description: "构建完整的品牌视觉体系，从标志到全触点设计语言",
+    span: "md:col-span-2",
+  },
+  {
+    icon: Globe,
+    title: "数字体验",
+    description: "打造沉浸式数字品牌体验，覆盖网站、应用及社交媒体",
+    span: "md:col-span-2",
+  },
+  {
+    icon: TrendingUp,
+    title: "增长策略",
+    description: "数据驱动的品牌增长方案，持续优化市场表现",
+    span: "md:col-span-2",
+  },
+  {
+    icon: Layers,
+    title: "品牌架构",
+    description: "多品牌管理与架构规划，最大化品牌资产价值",
+    span: "md:col-span-2",
+  },
+  {
+    icon: Zap,
+    title: "品牌激活",
+    description: "创意营销与品牌传播策略，引爆市场关注度",
+    span: "md:col-span-2",
+  },
+];
 
 export default function BentoFeatures() {
   return (
-    <section id="features" className="py-16 md:py-24 bg-background">
+    <section id="services" className="py-24 md:py-32 bg-background">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-mint-light text-primary mb-4">
-            核心功能
-          </span>
-          <h2 className="text-2xl md:text-3xl font-bold">为宝宝量身定制的健康方案</h2>
+          <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">
+            Our Services
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-gradient mb-4">
+            全方位品牌服务
+          </h2>
+          <p className="text-muted-foreground text-sm max-w-md mx-auto">
+            从策略到执行，为品牌注入持久生命力
+          </p>
         </motion.div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[180px]">
-
-          {/* 1. 科学成长指标 - Tall */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="md:col-span-2 md:row-span-2 rounded-3xl border border-border bg-card p-6 flex flex-col overflow-hidden hover:shadow-lg transition-shadow"
-          >
-            <div className="flex-1">
-              <GrowthAnimation />
-            </div>
-            <div>
-              <h3 className="text-base font-semibold mb-1">科学成长指标</h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">基于WHO儿童生长标准，精准对比身高、体重、BMI等关键发育指标。</p>
-            </div>
-          </motion.div>
-
-          {/* 2. 个性化营养方案 */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="md:col-span-2 rounded-3xl border border-border bg-card p-6 flex flex-col overflow-hidden hover:shadow-lg transition-shadow"
-          >
-            <div className="flex-1">
-              <NutritionAnimation />
-            </div>
-            <div>
-              <h3 className="text-base font-semibold mb-1">个性化营养方案</h3>
-              <p className="text-xs text-muted-foreground">智能推荐每日膳食搭配。</p>
-            </div>
-          </motion.div>
-
-          {/* 3. 全天候守护 - Tall */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="md:col-span-2 md:row-span-2 rounded-3xl border border-border bg-card p-6 flex flex-col overflow-hidden hover:shadow-lg transition-shadow"
-          >
-            <div className="flex-1 flex items-center justify-center">
-              <HeartbeatAnimation />
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <Heart className="size-4 text-coral" />
-                <h3 className="text-base font-semibold">全天候守护</h3>
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+          {services.map((service, i) => (
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className={`${service.span} rounded-2xl border border-border bg-card p-8 flex flex-col justify-between hover:border-foreground/20 transition-colors group`}
+            >
+              <service.icon className="size-5 text-muted-foreground group-hover:text-foreground transition-colors mb-6" />
+              <div>
+                <h3 className="text-base font-semibold mb-2">{service.title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">{service.description}</p>
               </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">从营养到安全，全方位守护宝宝健康成长每一天。</p>
-            </div>
-          </motion.div>
-
-          {/* 4. AI拍照分析 */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="md:col-span-2 rounded-3xl border border-border bg-card p-6 flex flex-col overflow-hidden hover:shadow-lg transition-shadow"
-          >
-            <div className="flex-1">
-              <PhotoAnimation />
-            </div>
-            <div>
-              <h3 className="text-base font-semibold mb-1">AI拍照分析</h3>
-              <p className="text-xs text-muted-foreground">拍摄食物，AI智能分析营养。</p>
-            </div>
-          </motion.div>
-
-          {/* 5. 过敏源守护 - Wide */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="md:col-span-3 rounded-3xl border border-border bg-card p-6 flex flex-col overflow-hidden hover:shadow-lg transition-shadow"
-          >
-            <div className="flex-1 flex items-center justify-center">
-              <AllergenShields />
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <Shield className="size-4 text-primary" />
-                <h3 className="text-base font-semibold">过敏源安全守护</h3>
-              </div>
-              <p className="text-xs text-muted-foreground">记录过敏史，选择食物时智能预警，守护宝宝饮食安全。</p>
-            </div>
-          </motion.div>
-
-          {/* 6. 专业报告 - Wide */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="md:col-span-3 rounded-3xl border border-border bg-card p-6 flex items-center gap-6 overflow-hidden hover:shadow-lg transition-shadow"
-          >
-            <div className="shrink-0">
-              <Baby className="size-10 text-primary" />
-            </div>
-            <div>
-              <h3 className="text-base font-semibold mb-1">专业健康报告</h3>
-              <p className="text-xs text-muted-foreground">一键生成详细的宝宝健康评估报告，给出个性化建议。</p>
-            </div>
-          </motion.div>
-
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

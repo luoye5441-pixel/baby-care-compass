@@ -1,67 +1,52 @@
 import { motion } from "framer-motion";
-import DisplayCards from "@/components/ui/display-cards";
 
-const featureCards = [
-  {
-    title: "科学成长指标",
-    description: "基于WHO儿童生长标准，精准对比身高、体重、BMI等关键发育指标",
-    date: "实时追踪",
-    titleClassName: "text-mint",
-    className:
-      "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-  },
-  {
-    title: "个性化营养方案",
-    description: "智能推荐每日膳食搭配，确保营养均衡摄入",
-    date: "每日推荐",
-    titleClassName: "text-coral",
-    className:
-      "[grid-area:stack] translate-x-16 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-  },
-  {
-    title: "AI拍照营养分析",
-    description: "拍摄食物照片，AI自动识别并分析营养成分与热量",
-    date: "AI驱动",
-    titleClassName: "text-apricot",
-    className:
-      "[grid-area:stack] translate-x-32 translate-y-20 hover:translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-  },
-  {
-    title: "过敏源安全守护",
-    description: "记录过敏史，选择食物时智能预警，守护饮食安全",
-    date: "全天候守护",
-    titleClassName: "text-lavender",
-    className:
-      "[grid-area:stack] translate-x-48 translate-y-[7.5rem] hover:translate-y-[5rem]",
-  },
+const steps = [
+  { num: "01", title: "品牌诊断", desc: "深入了解企业现状、市场环境与竞争格局" },
+  { num: "02", title: "策略制定", desc: "明确品牌定位、核心价值与传播策略" },
+  { num: "03", title: "创意设计", desc: "打造独特的品牌视觉体系与传播物料" },
+  { num: "04", title: "落地执行", desc: "全渠道品牌触点落地与持续优化迭代" },
 ];
 
 const FeaturesGrid = () => (
-  <section id="features" className="section-warm py-16 md:py-24">
-    <div className="max-w-6xl mx-auto px-6">
+  <section id="process" className="section-cool py-24 md:py-32">
+    <div className="max-w-5xl mx-auto px-6">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-14"
+        className="text-center mb-16"
       >
-        <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-mint-light text-primary mb-4">
-          核心功能
-        </span>
-        <h2 className="text-2xl md:text-3xl font-bold mb-3">为宝宝量身定制的健康方案</h2>
+        <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">
+          Our Process
+        </p>
+        <h2 className="font-display text-3xl md:text-4xl font-bold text-gradient mb-4">
+          合作流程
+        </h2>
         <p className="text-muted-foreground text-sm max-w-md mx-auto">
-          科学、便捷、温暖，让每位妈妈都能轻松掌握宝宝健康
+          系统化的品牌建设方法论，确保每一步精准高效
         </p>
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="flex justify-center min-h-[320px] items-center"
-      >
-        <DisplayCards cards={featureCards} />
-      </motion.div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        {steps.map((step, i) => (
+          <motion.div
+            key={step.num}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            className="relative group"
+          >
+            <div className="rounded-2xl border border-border bg-card p-8 h-full hover:border-foreground/20 transition-colors">
+              <span className="font-display text-4xl font-bold text-muted-foreground/20 group-hover:text-foreground/10 transition-colors">
+                {step.num}
+              </span>
+              <h3 className="text-base font-semibold mt-4 mb-2">{step.title}</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </div>
   </section>
 );

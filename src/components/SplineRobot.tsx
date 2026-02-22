@@ -1,10 +1,10 @@
-import { SplineScene } from "@/components/ui/splite"
 import { Card } from "@/components/ui/card"
 import { Spotlight } from "@/components/ui/spotlight"
+import { RobotVisual } from "@/components/RobotVisual"
 
 export function SplineRobot() {
   return (
-    <Card className="w-full max-w-6xl mx-auto h-[500px] bg-background/95 relative overflow-hidden border-border">
+    <Card className="w-full max-w-6xl mx-auto h-[500px] bg-card relative overflow-hidden border-border">
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
         fill="white"
@@ -21,12 +21,9 @@ export function SplineRobot() {
           </p>
         </div>
 
-        {/* Right content - 3D Robot */}
+        {/* Right content - Animated Robot */}
         <div className="flex-1 relative">
-          <SplineScene
-            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-            className="w-full h-full"
-          />
+          <RobotVisual className="w-full h-full" />
         </div>
       </div>
     </Card>

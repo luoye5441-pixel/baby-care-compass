@@ -9,8 +9,8 @@ export function SplineRobot() {
       <div className="flex h-full">
         {/* Left content */}
         <div className="flex-1 p-8 md:p-12 relative z-10 flex flex-col justify-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-gradient">
-            AI 驱动
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-gradient whitespace-nowrap">
+            AI+专业团队驱动
           </h2>
           <p className="mt-4 text-muted-foreground max-w-md text-sm leading-relaxed">
             全球来自 20 个不同国家的人工团队，结合 AI 智能分析，为品牌提供跨文化、全方位的策略支持。

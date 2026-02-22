@@ -6,6 +6,8 @@ const HeroSection = ({ onStart }: { onStart: () => void }) => {
     <section className="relative overflow-hidden min-h-[90vh] flex items-center justify-center">
       {/* WebGL Background */}
       <WebGLShader />
+      {/* Bottom gradient fade to match background */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background z-[1]" />
 
       {/* Content overlay */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">

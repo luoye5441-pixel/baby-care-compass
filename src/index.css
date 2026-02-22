@@ -46,8 +46,8 @@
     --apricot-light: 32 55% 95%;
     --lavender: 260 35% 88%;
     --lavender-light: 260 30% 96%;
-    --section-warm: 30 40% 96%;
-    --section-cool: 162 25% 96%;
+    --section-warm: 0 0% 100%;
+    --section-cool: 0 0% 100%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -111,7 +111,7 @@
     background-color: hsl(var(--section-cool));
   }
   .gradient-hero {
-    background: linear-gradient(180deg, hsl(var(--mint-light)) 0%, hsl(var(--background)) 100%);
+    background: hsl(var(--background));
   }
   .gradient-mint {
     background: linear-gradient(135deg, hsl(var(--mint-glow)), hsl(var(--mint-light)));

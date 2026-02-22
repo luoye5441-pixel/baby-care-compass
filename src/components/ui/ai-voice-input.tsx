@@ -4,27 +4,11 @@ import { Mic } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
-interface AIVoiceInputProps {
-  onStart?: () => void;
-  onStop?: (duration: number) => void;
-  visualizerBars?: number;
-  demoMode?: boolean;
-  demoInterval?: number;
-  className?: string;
-}
-
-export function AIVoiceInput({
-  onStart,
-  onStop,
-  visualizerBars = 48,
-  demoMode = false,
-  demoInterval = 3000,
-  className,
-}: AIVoiceInputProps) {
+export default function AIVoiceInput() {
   const [submitted, setSubmitted] = useState(false);
   const [time, setTime] = useState(0);
   const [isClient, setIsClient] = useState(false);
-  const [isDemo, setIsDemo] = useState(demoMode);
+  const [isDemo, setIsDemo] = useState(true);
 
   useEffect(() => {
     setIsClient(true);
@@ -34,18 +18,23 @@ export function AIVoiceInput({
     let intervalId: ReturnType<typeof setInterval>;
 
     if (submitted) {
-      onStart?.();
       intervalId = setInterval(() => {
         setTime((t) => t + 1);
       }, 1000);
-    } else if (time > 0) {
-      onStop?.(time);
+    } else {
       setTime(0);
     }
 
     return () => clearInterval(intervalId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitted]);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
+  };
 
   useEffect(() => {
     if (!isDemo) return;
@@ -56,7 +45,7 @@ export function AIVoiceInput({
       timeoutId = setTimeout(() => {
         setSubmitted(false);
         timeoutId = setTimeout(runAnimation, 1000);
-      }, demoInterval);
+      }, 3000);
     };
 
     const initialTimeout = setTimeout(runAnimation, 100);
@@ -64,13 +53,7 @@ export function AIVoiceInput({
       clearTimeout(timeoutId);
       clearTimeout(initialTimeout);
     };
-  }, [isDemo, demoInterval]);
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
-  };
+  }, [isDemo]);
 
   const handleClick = () => {
     if (isDemo) {
@@ -82,72 +65,64 @@ export function AIVoiceInput({
   };
 
   return (
-    <div className={cn("w-full py-4", className)}>
-      <div className="relative w-full flex items-center justify-center">
-        {/* Mic Button */}
+    <div className="w-full py-4">
+      <div className="relative max-w-xl w-full mx-auto flex items-center flex-col gap-2">
         <button
           className={cn(
-            "group w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 relative z-10",
+            "group w-16 h-16 rounded-xl flex items-center justify-center transition-colors",
             submitted
-              ? "bg-foreground/10 border-2 border-foreground"
-              : "bg-foreground text-background hover:bg-foreground/90"
+              ? "bg-none"
+              : "bg-none hover:bg-white/5"
           )}
-          onClick={handleClick}
           type="button"
+          onClick={handleClick}
         >
           {submitted ? (
-            <div className="w-5 h-5 rounded-sm bg-foreground animate-pulse" />
+            <div
+              className="w-6 h-6 rounded-sm animate-spin bg-white cursor-pointer pointer-events-auto"
+              style={{ animationDuration: "3s" }}
+            />
           ) : (
-            <Mic className="w-6 h-6" />
+            <Mic className="w-6 h-6 text-white/90" />
           )}
         </button>
 
-        {/* Timer */}
         <span
           className={cn(
-            "absolute left-1/2 -translate-x-1/2 -top-8 font-mono text-sm text-muted-foreground tabular-nums transition-opacity duration-300",
-            submitted ? "opacity-100" : "opacity-0"
+            "font-mono text-sm transition-opacity duration-300",
+            submitted
+              ? "text-white/70"
+              : "text-white/30"
           )}
         >
           {formatTime(time)}
         </span>
 
-        {/* Visualizer */}
-        <div
-          className={cn(
-            "flex items-center gap-0.5 h-12 absolute left-1/2 -translate-x-1/2 transition-all duration-300",
-            submitted
-              ? "w-[60%] opacity-100"
-              : "w-0 opacity-0"
-          )}
-        >
-          {isClient &&
-            [...Array(visualizerBars)].map((_, i) => (
-              <div
-                key={i}
-                className="flex-1 rounded-full bg-foreground/50 transition-all duration-150"
-                style={{
-                  height: submitted
-                    ? `${20 + Math.random() * 80}%`
-                    : "20%",
-                  animationDelay: `${i * 50}ms`,
-                  animation: submitted
-                    ? `pulse ${0.5 + Math.random() * 0.5}s ease-in-out infinite alternate`
-                    : "none",
-                }}
-              />
-            ))}
+        <div className="h-4 w-64 flex items-center justify-center gap-0.5">
+          {[...Array(48)].map((_, i) => (
+            <div
+              key={i}
+              className={cn(
+                "w-0.5 rounded-full transition-all duration-300",
+                submitted
+                  ? "bg-white/50 animate-pulse"
+                  : "bg-white/10 h-1"
+              )}
+              style={
+                submitted && isClient
+                  ? {
+                      height: `${20 + Math.random() * 80}%`,
+                      animationDelay: `${i * 0.05}s`,
+                    }
+                  : undefined
+              }
+            />
+          ))}
         </div>
 
-        {/* Status Text */}
-        <span
-          className={cn(
-            "absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-muted-foreground whitespace-nowrap transition-opacity duration-300",
-            "opacity-100"
-          )}
-        >
-          {submitted ? "聆听中..." : "点击开始语音"}
-        </span>
+        <p className="h-4 text-xs text-white/70">
+          {submitted ? "Listening..." : "Click to speak"}
+        </p>
       </div>
     </div>
   );

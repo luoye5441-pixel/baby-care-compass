@@ -4,7 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import FeaturesGrid from "@/components/FeaturesGrid";
 import HealthForm, { type BabyData } from "@/components/HealthForm";
 import HealthReportView from "@/components/HealthReport";
-import AllergenReminder from "@/components/AllergenReminder";
+
 import { generateReport, type HealthReport } from "@/lib/healthUtils";
 
 const Index = () => {
@@ -32,7 +32,7 @@ const Index = () => {
       <div ref={reportRef}>
         {report && <HealthReportView data={report.data} report={report.report} />}
       </div>
-      <AllergenReminder />
+      
 
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-border/40">

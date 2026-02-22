@@ -1,40 +1,44 @@
 import { motion } from "framer-motion";
-import DisplayCards from "@/components/ui/display-cards";
+import { Search, Palette, Globe, BarChart3, PenTool } from "lucide-react";
+import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { SplineRobot } from "@/components/SplineRobot";
 import FeaturesGrid from "@/components/FeaturesGrid";
 
-const displayCards = [
+const features = [
   {
-    title: "品牌定位",
-    description: "深度市场研究与竞品分析，精准锁定品牌核心定位与差异化优势",
-    date: "战略基石",
-    titleClassName: "text-foreground",
-    className:
-      "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-full before:outline-1 before:rounded-xl before:outline-border before:h-full before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+    Icon: Search,
+    name: "品牌调研",
+    description: "深度市场研究与竞品分析，精准锁定品牌核心定位与差异化优势。",
+    cta: "了解更多",
+    className: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3",
   },
   {
-    title: "视觉识别",
-    description: "构建完整的品牌视觉体系，从标志到全触点设计语言",
-    date: "设计语言",
-    titleClassName: "text-foreground",
-    className:
-      "[grid-area:stack] translate-x-16 translate-y-10 hover:-translate-y-1 before:absolute before:w-full before:outline-1 before:rounded-xl before:outline-border before:h-full before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+    Icon: Palette,
+    name: "视觉识别",
+    description: "构建完整的品牌视觉体系，从标志到全触点设计语言。",
+    cta: "了解更多",
+    className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
   },
   {
-    title: "数字体验",
-    description: "打造沉浸式数字品牌体验，覆盖网站、应用及社交媒体",
-    date: "全渠道",
-    titleClassName: "text-foreground",
-    className:
-      "[grid-area:stack] translate-x-32 translate-y-20 hover:translate-y-10 before:absolute before:w-full before:outline-1 before:rounded-xl before:outline-border before:h-full before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+    Icon: Globe,
+    name: "数字体验",
+    description: "打造沉浸式数字品牌体验，覆盖网站、应用及社交媒体。",
+    cta: "了解更多",
+    className: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4",
   },
   {
-    title: "增长策略",
-    description: "数据驱动的品牌增长方案，持续优化市场表现",
-    date: "数据驱动",
-    titleClassName: "text-foreground",
-    className:
-      "[grid-area:stack] translate-x-48 translate-y-[7.5rem] hover:translate-y-[5rem]",
+    Icon: PenTool,
+    name: "内容策略",
+    description: "精准内容规划与创意产出，打造有影响力的品牌叙事。",
+    cta: "了解更多",
+    className: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2",
+  },
+  {
+    Icon: BarChart3,
+    name: "增长策略",
+    description: "数据驱动的品牌增长方案，持续优化市场表现与用户转化。",
+    cta: "了解更多",
+    className: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4",
   },
 ];
 
@@ -59,6 +63,19 @@ export default function BentoFeatures() {
           </p>
         </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <BentoGrid className="lg:grid-rows-3">
+            {features.map((feature) => (
+              <BentoCard key={feature.name} {...feature} />
+            ))}
+          </BentoGrid>
+        </motion.div>
+
         {/* Spline Robot */}
         <div className="mb-16">
           <SplineRobot />
@@ -66,15 +83,6 @@ export default function BentoFeatures() {
 
         {/* 合作流程 */}
         <FeaturesGrid />
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex justify-center min-h-[380px] items-center"
-        >
-          <DisplayCards cards={displayCards} />
-        </motion.div>
       </div>
     </section>
   );

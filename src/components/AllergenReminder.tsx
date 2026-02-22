@@ -68,7 +68,7 @@ const AllergenReminder = () => {
               className="rounded-2xl bg-destructive/6 border border-destructive/15 p-5"
             >
               <p className="font-medium text-sm text-destructive mb-2">
-                ⚠️ 已标记 {selected.length} 种过敏源
+                ⚠ 已标记 {selected.length} 种过敏源
               </p>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 请在给宝宝添加新食物时注意避免以上过敏源。建议首次添加新食物时少量尝试，观察48小时无异常后再增加用量。如有严重过敏史，请随身携带抗过敏药物并及时就医。

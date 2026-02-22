@@ -100,7 +100,7 @@ const HealthReportView = ({ data, report }: Props) => {
         {/* Nutrition */}
         <div className="card-elevated p-6 md:p-7">
           <h3 className="text-base font-semibold mb-4 flex items-center gap-2">
-            <span className="w-7 h-7 rounded-lg bg-coral-light flex items-center justify-center text-sm">🥗</span>
+            <span className="w-7 h-7 rounded-lg bg-coral-light flex items-center justify-center text-sm font-bold text-secondary">营</span>
             营养方案
           </h3>
           <div className="space-y-3">

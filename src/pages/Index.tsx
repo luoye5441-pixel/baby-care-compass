@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import { SplineRobot } from "@/components/SplineRobot";
 import BentoFeatures from "@/components/BentoFeatures";
 import FeaturesGrid from "@/components/FeaturesGrid";
 import HealthForm, { type BabyData } from "@/components/HealthForm";
@@ -26,6 +27,9 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection onStart={handleStart} />
+      <div className="px-6 py-16">
+        <SplineRobot />
+      </div>
       <BentoFeatures />
       <FeaturesGrid />
       <HealthForm onSubmit={handleSubmit} />

@@ -159,8 +159,18 @@ export default function RadialOrbitalTimeline({
         <div className="absolute w-[300px] h-[300px] rounded-full border border-border/20" />
         <div className="absolute w-[200px] h-[200px] rounded-full border border-border/10" />
 
-        {/* Center dot */}
-        <div className="absolute w-3 h-3 rounded-full bg-foreground/60" />
+        {/* Center content */}
+        <div className="absolute flex flex-col items-center justify-center text-center z-10 pointer-events-none">
+          <p className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-1">
+            Our Process
+          </p>
+          <h2 className="font-display text-lg font-bold text-foreground mb-1">
+            合作流程
+          </h2>
+          <p className="text-muted-foreground text-[10px] max-w-[140px] leading-tight">
+            系统化的品牌建设方法论
+          </p>
+        </div>
 
         {timelineData.map((item, index) => {
           const position = calculateNodePosition(index, timelineData.length);
@@ -193,7 +203,7 @@ export default function RadialOrbitalTimeline({
 
               {/* Node circle */}
               <div
-                className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                className={`w-16 h-16 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
                   isExpanded
                     ? "bg-foreground text-background border-foreground scale-110"
                     : isRelated
@@ -201,7 +211,7 @@ export default function RadialOrbitalTimeline({
                     : "bg-card text-foreground border-border hover:border-foreground/40"
                 }`}
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-7 h-7" />
               </div>
 
               {/* Label */}

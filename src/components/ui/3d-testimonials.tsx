@@ -1,6 +1,16 @@
-import React, { ComponentPropsWithoutRef, useRef } from "react";
+import React, { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/lib/utils";
+import {
+  Card,
+  CardContent,
+} from "@/components/ui/card";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
 
+// --- Marquee ---
 interface MarqueeProps extends ComponentPropsWithoutRef<"div"> {
   className?: string;
   reverse?: boolean;
@@ -23,7 +33,7 @@ export function Marquee({
     <div
       {...props}
       className={cn(
-        "group flex overflow-hidden p-2 [--duration:40s] [--gap:1rem] [gap:var(--gap)]",
+        "group flex overflow-hidden [--duration:40s] [--gap:1rem] [gap:var(--gap)]",
         vertical ? "flex-col" : "flex-row",
         className
       )}
@@ -51,55 +61,85 @@ export function Marquee({
   );
 }
 
-interface TeamMember {
+// --- Testimonial Data ---
+export interface Testimonial {
   name: string;
-  role: string;
-  quote: string;
-  avatar: string;
+  username: string;
+  body: string;
+  img: string;
+  country: string;
 }
 
-export function TestimonialCard({ member }: { member: TeamMember }) {
-  const cardRef = useRef<HTMLDivElement>(null);
+// --- ReviewCard ---
+function ReviewCard({ img, name, username, body, country }: Testimonial) {
+  return (
+    <Card className="w-[260px] shrink-0 bg-card border-border/60 shadow-sm">
+      <CardContent className="p-4">
+        <div className="flex items-center gap-3">
+          <Avatar className="h-10 w-10">
+            <AvatarImage src={img} alt={name} />
+            <AvatarFallback className="text-xs">
+              {name.slice(0, 2)}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-1.5">
+              <p className="text-sm font-semibold text-foreground truncate">
+                {name}
+              </p>
+              <span className="text-base leading-none">{country}</span>
+            </div>
+            <p className="text-xs text-muted-foreground">{username}</p>
+          </div>
+        </div>
+        <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+          {body}
+        </p>
+      </CardContent>
+    </Card>
+  );
+}
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -8;
-    const rotateY = ((x - centerX) / centerX) * 8;
+// --- 3D Testimonials ---
+interface TestimonialsSectionProps {
+  testimonials: Testimonial[];
+}
 
-    cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-  };
-
-  const handleMouseLeave = () => {
-    if (!cardRef.current) return;
-    cardRef.current.style.transform =
-      "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
-  };
+export function Testimonials3D({ testimonials }: TestimonialsSectionProps) {
+  const col1 = testimonials.filter((_, i) => i % 3 === 0);
+  const col2 = testimonials.filter((_, i) => i % 3 === 1);
+  const col3 = testimonials.filter((_, i) => i % 3 === 2);
 
   return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="w-[280px] shrink-0 rounded-2xl border border-border bg-card p-6 transition-transform duration-200 ease-out cursor-default"
-      style={{ transformStyle: "preserve-3d" }}
-    >
-      <div className="flex items-center gap-3 mb-4">
-        <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-sm font-semibold text-foreground">
-          {member.avatar}
-        </div>
-        <div>
-          <p className="text-sm font-semibold text-foreground">{member.name}</p>
-          <p className="text-xs text-muted-foreground">{member.role}</p>
-        </div>
+    <div className="relative flex w-full items-center justify-center overflow-hidden">
+      <div
+        className="flex gap-4"
+        style={{
+          transform:
+            "perspective(1200px) rotateX(10deg) rotateY(-15deg) rotateZ(5deg) scale(0.9)",
+          transformStyle: "preserve-3d",
+        }}
+      >
+        <Marquee vertical pauseOnHover className="[--duration:25s]">
+          {col1.map((t) => (
+            <ReviewCard key={t.username} {...t} />
+          ))}
+        </Marquee>
+        <Marquee vertical reverse pauseOnHover className="[--duration:30s]">
+          {col2.map((t) => (
+            <ReviewCard key={t.username} {...t} />
+          ))}
+        </Marquee>
+        <Marquee vertical pauseOnHover className="[--duration:28s]">
+          {col3.map((t) => (
+            <ReviewCard key={t.username} {...t} />
+          ))}
+        </Marquee>
       </div>
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        "{member.quote}"
-      </p>
+
+      {/* Fade edges */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent" />
     </div>
   );
 }

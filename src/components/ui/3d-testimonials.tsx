@@ -1,10 +1,6 @@
 import React, { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/lib/utils";
 import {
-  Card,
-  CardContent,
-} from "@/components/ui/card";
-import {
   Avatar,
   AvatarFallback,
   AvatarImage,
@@ -61,7 +57,7 @@ export function Marquee({
   );
 }
 
-// --- Testimonial Data ---
+// --- Types ---
 export interface Testimonial {
   name: string;
   username: string;
@@ -73,30 +69,28 @@ export interface Testimonial {
 // --- ReviewCard ---
 function ReviewCard({ img, name, username, body, country }: Testimonial) {
   return (
-    <Card className="w-[260px] shrink-0 bg-card border-border/60 shadow-sm">
-      <CardContent className="p-4">
-        <div className="flex items-center gap-3">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src={img} alt={name} />
-            <AvatarFallback className="text-xs">
-              {name.slice(0, 2)}
-            </AvatarFallback>
-          </Avatar>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-1.5">
-              <p className="text-sm font-semibold text-foreground truncate">
-                {name}
-              </p>
-              <span className="text-base leading-none">{country}</span>
-            </div>
-            <p className="text-xs text-muted-foreground">{username}</p>
+    <div className="w-[260px] shrink-0 rounded-xl border border-border/60 bg-card p-4 shadow-sm">
+      <div className="flex items-center gap-3">
+        <Avatar className="h-10 w-10 border border-border/40">
+          <AvatarImage src={img} alt={name} />
+          <AvatarFallback className="text-xs bg-muted">
+            {name.slice(0, 2)}
+          </AvatarFallback>
+        </Avatar>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1.5">
+            <p className="text-sm font-semibold text-foreground truncate">
+              {name}
+            </p>
           </div>
+          <p className="text-xs text-muted-foreground">{username}</p>
         </div>
-        <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-          {body}
-        </p>
-      </CardContent>
-    </Card>
+      </div>
+      <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+        {body}
+      </p>
+      <p className="mt-2 text-xs text-muted-foreground/60">{country}</p>
+    </div>
   );
 }
 
@@ -111,12 +105,12 @@ export function Testimonials3D({ testimonials }: TestimonialsSectionProps) {
   const col3 = testimonials.filter((_, i) => i % 3 === 2);
 
   return (
-    <div className="relative flex w-full items-center justify-center overflow-hidden">
+    <div className="relative flex w-full h-full items-center justify-center overflow-hidden">
       <div
         className="flex gap-4"
         style={{
           transform:
-            "perspective(1200px) rotateX(10deg) rotateY(-15deg) rotateZ(5deg) scale(0.9)",
+            "perspective(1200px) rotateX(10deg) rotateY(-15deg) rotateZ(5deg) scale(0.85)",
           transformStyle: "preserve-3d",
         }}
       >

@@ -3,77 +3,76 @@ import { Testimonials3D, type Testimonial } from "@/components/ui/3d-testimonial
 
 const testimonials: Testimonial[] = [
   {
-    name: "林小雨",
-    username: "@xiaoyu",
-    body: "专业的UI设计让品牌焕然一新，每个细节都恰到好处。",
-    img: "https://randomuser.me/api/portraits/women/32.jpg",
-    country: "🇨🇳",
-  },
-  {
-    name: "张明辉",
-    username: "@minghui",
-    body: "动效设计让整个品牌体验提升了一个层级，用户反馈非常好。",
-    img: "https://randomuser.me/api/portraits/men/45.jpg",
-    country: "🇨🇳",
-  },
-  {
-    name: "Carlos Ray",
-    username: "@carl",
-    body: "Great for testimonials and logos. The team delivered beyond expectations.",
-    img: "https://randomuser.me/api/portraits/men/52.jpg",
-    country: "🇪🇸",
-  },
-  {
-    name: "陈思琪",
-    username: "@siqi",
-    body: "产品经理视角出发，每个功能都精准命中品牌目标，效率极高。",
-    img: "https://randomuser.me/api/portraits/women/44.jpg",
-    country: "🇨🇳",
-  },
-  {
-    name: "Emma Lee",
-    username: "@emma",
-    body: "Love the pause on hover feature! The 3D effect is stunning.",
-    img: "https://randomuser.me/api/portraits/women/68.jpg",
-    country: "🇨🇦",
-  },
-  {
     name: "Ava Green",
     username: "@ava",
-    body: "Cascade AI made my workflow 10x faster! Incredible team support.",
-    img: "https://randomuser.me/api/portraits/women/12.jpg",
-    country: "🇦🇺",
-  },
-  {
-    name: "王子轩",
-    username: "@zixuan",
-    body: "视频剪辑出品质量极高，完美呈现品牌故事的每一个细节。",
-    img: "https://randomuser.me/api/portraits/men/22.jpg",
-    country: "🇨🇳",
+    body: "UI设计让品牌焕然一新，每个像素都承载着品牌温度。",
+    img: "https://randomuser.me/api/portraits/women/32.jpg",
+    country: "🇦🇺 Australia",
   },
   {
     name: "Ana Miller",
     username: "@ana",
-    body: "Vertical marquee is a game changer! Perfect for our landing page.",
-    img: "https://randomuser.me/api/portraits/women/56.jpg",
-    country: "🇩🇪",
+    body: "动效设计让界面活了起来，用户互动体验提升巨大！",
+    img: "https://randomuser.me/api/portraits/women/68.jpg",
+    country: "🇩🇪 Germany",
   },
   {
-    name: "赵天宇",
-    username: "@tianyu",
-    body: "前端开发质量一流，性能与美感完美兼顾，合作非常愉快。",
+    name: "Mateo Rossi",
+    username: "@mat",
+    body: "视频剪辑质量一流，完美呈现品牌故事的节奏感。",
+    img: "https://randomuser.me/api/portraits/men/45.jpg",
+    country: "🇮🇹 Italy",
+  },
+  {
+    name: "Carlos Ray",
+    username: "@carl",
+    body: "产品策略精准到位，每个功能都命中核心目标。",
+    img: "https://randomuser.me/api/portraits/men/52.jpg",
+    country: "🇪🇸 Spain",
+  },
+  {
+    name: "Emma Lee",
+    username: "@emma",
+    body: "品牌策略让我们在市场中脱颖而出，效果惊人！",
+    img: "https://randomuser.me/api/portraits/women/44.jpg",
+    country: "🇨🇦 Canada",
+  },
+  {
+    name: "Liam Chen",
+    username: "@liam",
+    body: "前端开发质量极高，性能与美感完美兼顾。",
+    img: "https://randomuser.me/api/portraits/men/22.jpg",
+    country: "🇨🇳 China",
+  },
+  {
+    name: "Sofia Park",
+    username: "@sofia",
+    body: "全渠道品牌触点落地执行到位，合作非常高效愉快。",
+    img: "https://randomuser.me/api/portraits/women/56.jpg",
+    country: "🇰🇷 Korea",
+  },
+  {
+    name: "James Wright",
+    username: "@james",
+    body: "跨文化团队带来独特视角，品牌国际化效果显著。",
     img: "https://randomuser.me/api/portraits/men/36.jpg",
-    country: "🇨🇳",
+    country: "🇬🇧 UK",
+  },
+  {
+    name: "Yuki Tanaka",
+    username: "@yuki",
+    body: "AI驱动的分析让决策更精准，数据赋能品牌增长。",
+    img: "https://randomuser.me/api/portraits/women/12.jpg",
+    country: "🇯🇵 Japan",
   },
 ];
 
 export function SplineRobot() {
   return (
     <div className="w-full max-w-6xl mx-auto space-y-8">
-      {/* AI + Team Section - Enlarged */}
+      {/* AI + Team Section */}
       <div className="h-[560px] relative overflow-hidden rounded-lg border border-border bg-card">
         <div className="absolute top-1/2 left-2/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.08)_0%,rgba(99,102,241,0.04)_40%,transparent_70%)]" />
-
         <div className="flex h-full">
           <div className="flex-1 p-10 md:p-16 relative z-10 flex flex-col justify-center">
             <h2 className="font-display text-4xl md:text-5xl font-bold text-gradient whitespace-nowrap">

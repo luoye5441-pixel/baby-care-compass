@@ -66,94 +66,79 @@ const HealthForm = ({ onSubmit }: Props) => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="grid auto-rows-[minmax(120px,auto)] grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {/* 姓名 */}
-            <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card border border-border/50 p-6 transition-all duration-300 hover:border-border">
-              <div className="pointer-events-none absolute inset-0 transition-all duration-300 group-hover:bg-muted/20" />
-              <div className="relative z-10">
-                <User className="h-8 w-8 text-muted-foreground/60 mb-3 transition-all duration-300 group-hover:text-foreground group-hover:scale-90 origin-left" />
-                <label className="block text-xs font-medium text-muted-foreground mb-3">您的姓名</label>
-                <input
-                  type="text"
-                  value={form.name}
-                  onChange={(e) => update("name", e.target.value)}
-                  className="input-field"
-                  required
-                />
-              </div>
+            <div className="group relative flex flex-col overflow-hidden rounded-2xl bg-card/80 border border-border/40 p-5 transition-all duration-500 hover:shadow-[0_0_30px_-5px_hsl(var(--foreground)/0.1)] hover:border-border/80">
+              <User className="h-6 w-6 text-muted-foreground/50 mb-2" />
+              <label className="block text-xs font-medium text-muted-foreground mb-2">您的姓名</label>
+              <input
+                type="text"
+                value={form.name}
+                onChange={(e) => update("name", e.target.value)}
+                className="input-field"
+                required
+              />
             </div>
 
             {/* 邮箱 */}
-            <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card border border-border/50 p-6 transition-all duration-300 hover:border-border">
-              <div className="pointer-events-none absolute inset-0 transition-all duration-300 group-hover:bg-muted/20" />
-              <div className="relative z-10">
-                <Mail className="h-8 w-8 text-muted-foreground/60 mb-3 transition-all duration-300 group-hover:text-foreground group-hover:scale-90 origin-left" />
-                <label className="block text-xs font-medium text-muted-foreground mb-3">电子邮箱</label>
-                <input
-                  type="email"
-                  value={form.email}
-                  onChange={(e) => update("email", e.target.value)}
-                  className="input-field"
-                  required
-                />
-              </div>
+            <div className="group relative flex flex-col overflow-hidden rounded-2xl bg-card/80 border border-border/40 p-5 transition-all duration-500 hover:shadow-[0_0_30px_-5px_hsl(var(--foreground)/0.1)] hover:border-border/80">
+              <Mail className="h-6 w-6 text-muted-foreground/50 mb-2" />
+              <label className="block text-xs font-medium text-muted-foreground mb-2">电子邮箱</label>
+              <input
+                type="email"
+                value={form.email}
+                onChange={(e) => update("email", e.target.value)}
+                className="input-field"
+                required
+              />
             </div>
 
             {/* 电话 */}
-            <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card border border-border/50 p-6 transition-all duration-300 hover:border-border">
-              <div className="pointer-events-none absolute inset-0 transition-all duration-300 group-hover:bg-muted/20" />
-              <div className="relative z-10">
-                <Phone className="h-8 w-8 text-muted-foreground/60 mb-3 transition-all duration-300 group-hover:text-foreground group-hover:scale-90 origin-left" />
-                <label className="block text-xs font-medium text-muted-foreground mb-3">联系电话</label>
-                <input
-                  type="tel"
-                  value={form.phone}
-                  onChange={(e) => update("phone", e.target.value)}
-                  className="input-field"
-                />
+            <div className="group relative flex flex-col overflow-hidden rounded-2xl bg-card/80 border border-border/40 p-5 transition-all duration-500 hover:shadow-[0_0_30px_-5px_hsl(var(--foreground)/0.1)] hover:border-border/80">
+              <Phone className="h-6 w-6 text-muted-foreground/50 mb-2" />
+              <label className="block text-xs font-medium text-muted-foreground mb-2">联系电话</label>
+              <input
+                type="tel"
+                value={form.phone}
+                onChange={(e) => update("phone", e.target.value)}
+                className="input-field"
+              />
+            </div>
+
+            {/* 预算 */}
+            <div className="group relative flex flex-col overflow-hidden rounded-2xl bg-card/80 border border-border/40 p-5 md:col-span-2 transition-all duration-500 hover:shadow-[0_0_30px_-5px_hsl(var(--foreground)/0.1)] hover:border-border/80">
+              <Wallet className="h-6 w-6 text-muted-foreground/50 mb-2" />
+              <label className="block text-xs font-medium text-muted-foreground mb-3">预算范围</label>
+              <div className="grid grid-cols-3 gap-3">
+                {["10-30万", "30-80万", "80万以上"].map((opt) => (
+                  <button
+                    type="button"
+                    key={opt}
+                    onClick={() => update("budget", opt)}
+                    className={cn(
+                      "py-3 rounded-xl border text-sm font-medium transition-all",
+                      form.budget === opt
+                        ? "bg-foreground text-background border-foreground"
+                        : "bg-card border-border hover:border-foreground/30"
+                    )}
+                  >
+                    {opt}
+                  </button>
+                ))}
               </div>
             </div>
 
-            {/* 预算 - bottom middle+right span 2 */}
-            <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card border border-border/50 p-6 md:col-span-2 transition-all duration-300 hover:border-border">
-              <div className="pointer-events-none absolute inset-0 transition-all duration-300 group-hover:bg-muted/20" />
-              <div className="relative z-10">
-                <Wallet className="h-8 w-8 text-muted-foreground/60 mb-3 transition-all duration-300 group-hover:text-foreground group-hover:scale-90 origin-left" />
-                <label className="block text-xs font-medium text-muted-foreground mb-3">预算范围</label>
-                <div className="grid grid-cols-3 gap-3">
-                  {["10-30万", "30-80万", "80万以上"].map((opt) => (
-                    <button
-                      type="button"
-                      key={opt}
-                      onClick={() => update("budget", opt)}
-                      className={cn(
-                        "py-3 rounded-xl border text-sm font-medium transition-all",
-                        form.budget === opt
-                          ? "bg-foreground text-background border-foreground"
-                          : "bg-card border-border hover:border-foreground/30"
-                      )}
-                    >
-                      {opt}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* 需求 - full width */}
-            <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card border border-border/50 p-6 md:col-span-3 transition-all duration-300 hover:border-border">
-              <div className="pointer-events-none absolute inset-0 transition-all duration-300 group-hover:bg-muted/20" />
-              <div className="relative z-10">
-                <MessageSquare className="h-8 w-8 text-muted-foreground/60 mb-3 transition-all duration-300 group-hover:text-foreground group-hover:scale-90 origin-left" />
-                <label className="block text-xs font-medium text-muted-foreground mb-3">项目需求</label>
-                <textarea
-                  value={form.needs}
-                  onChange={(e) => update("needs", e.target.value)}
-                  placeholder="请简要描述您的品牌需求..."
-                  rows={3}
-                  className="input-field resize-none"
-                />
-              </div>
+            {/* 需求 */}
+            <div className="group relative flex flex-col overflow-hidden rounded-2xl bg-card/80 border border-border/40 p-5 md:col-span-3 transition-all duration-500 hover:shadow-[0_0_30px_-5px_hsl(var(--foreground)/0.1)] hover:border-border/80">
+              <MessageSquare className="h-6 w-6 text-muted-foreground/50 mb-2" />
+              <label className="block text-xs font-medium text-muted-foreground mb-2">项目需求</label>
+              <textarea
+                value={form.needs}
+                onChange={(e) => update("needs", e.target.value)}
+                placeholder="请简要描述您的品牌需求..."
+                rows={3}
+                className="input-field resize-none"
+              />
             </div>
           </div>
 

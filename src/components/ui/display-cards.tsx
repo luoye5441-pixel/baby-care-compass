@@ -23,7 +23,7 @@ function DisplayCard({
   return (
     <div
       className={cn(
-        "relative flex h-36 w-[22rem] -skew-y-[8deg] select-none flex-col justify-between rounded-xl border border-border bg-muted/70 px-4 py-3 transition-all duration-700 ease-out [&>*]:flex [&>*]:items-center [&>*]:gap-2",
+        "relative flex h-40 w-[26rem] -skew-y-[8deg] select-none flex-col justify-between rounded-xl border border-border bg-muted/70 px-5 py-4 transition-all duration-700 ease-out overflow-hidden [&>*]:flex [&>*]:items-center [&>*]:gap-2",
         className
       )}
     >
@@ -33,7 +33,7 @@ function DisplayCard({
         </span>
         <p className={cn("text-lg font-bold", titleClassName)}>{title}</p>
       </div>
-      <p className="whitespace-nowrap text-lg">{description}</p>
+      <p className="text-sm leading-relaxed line-clamp-2">{description}</p>
       <p className="text-sm text-muted-foreground">{date}</p>
     </div>
   );

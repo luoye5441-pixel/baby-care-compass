@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Search, Target, Palette, Rocket } from "lucide-react";
+import { Search, Target, PenTool, Send } from "lucide-react";
 import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
 
 const timelineData = [
@@ -31,7 +31,7 @@ const timelineData = [
     date: "第三阶段",
     content: "打造独特的品牌视觉体系与传播物料，构建完整的品牌识别系统。",
     category: "设计",
-    icon: Palette,
+    icon: PenTool,
     relatedIds: [2, 4],
     status: "in-progress" as const,
     energy: 65,
@@ -42,7 +42,7 @@ const timelineData = [
     date: "第四阶段",
     content: "全渠道品牌触点落地与持续优化迭代，确保品牌策略有效落地。",
     category: "执行",
-    icon: Rocket,
+    icon: Send,
     relatedIds: [3],
     status: "pending" as const,
     energy: 40,

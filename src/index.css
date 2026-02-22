@@ -43,6 +43,16 @@
     --section-warm: 0 0% 0%;
     --section-cool: 0 0% 3%;
 
+    --sky-300: #7dd3fc;
+    --pink-300: #f9a8d4;
+    --green-300: #86efac;
+    --yellow-300: #fde047;
+    --red-300: #fca5a5;
+    --purple-300: #d8b4fe;
+    --blue-300: #93c5fd;
+    --indigo-300: #a5b4fc;
+    --violet-300: #c4b5fd;
+
     --sidebar-background: 0 0% 4%;
     --sidebar-foreground: 0 0% 95%;
     --sidebar-primary: 0 0% 100%;

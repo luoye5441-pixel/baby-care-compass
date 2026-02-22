@@ -1,43 +1,25 @@
 import { motion } from "framer-motion";
-import heroBanner from "@/assets/hero-banner.jpg";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import DisplayCards from "@/components/ui/display-cards";
 import { BarChart3, Salad, Camera, AlertTriangle } from "lucide-react";
+
 const HeroSection = ({ onStart }: { onStart: () => void }) => {
   return (
     <section className="relative overflow-hidden gradient-hero">
       <div className="max-w-6xl mx-auto px-6 pt-16 pb-8 md:pt-24 md:pb-12">
-        {/* Banner Image */}
+        {/* Hero Text */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="relative rounded-[2rem] overflow-hidden mb-12 shadow-[0_8px_40px_-8px_rgba(0,0,0,0.08)]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
         >
-          <img
-            src={heroBanner}
-            alt="宝贝健康"
-            className="w-full h-[240px] md:h-[360px] object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-transparent" />
-          <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-3xl md:text-5xl font-bold text-primary-foreground leading-tight mb-2 drop-shadow-md"
-            >
-              守护宝宝 · 健康成长
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-primary-foreground/80 text-sm md:text-base max-w-md drop-shadow-sm"
-            >
-              专为1-8岁宝宝打造的科学健康管理平台
-            </motion.p>
-          </div>
+          <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-3">
+            守护宝宝 · 健康成长
+          </h1>
+          <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto">
+            专为1-8岁宝宝打造的科学健康管理平台
+          </p>
         </motion.div>
 
         {/* Display Cards */}

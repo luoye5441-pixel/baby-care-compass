@@ -66,36 +66,9 @@ const HealthForm = ({ onSubmit }: Props) => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="grid auto-rows-[minmax(120px,auto)] grid-cols-1 md:grid-cols-3 gap-4">
-            {/* 姓名 - tall left */}
-            <div className="group relative flex flex-col justify-between overflow-hidden rounded-xl bg-card border border-border/50 p-6 md:row-span-2 transition-all duration-300 hover:border-border">
-              <div className="pointer-events-none absolute inset-0 transition-all duration-300 group-hover:bg-muted/20" />
-              <div className="relative z-10">
-                <User className="h-8 w-8 text-muted-foreground/60 mb-3 transition-all duration-300 group-hover:text-foreground group-hover:scale-90 origin-left" />
-                <label className="block text-xs font-medium text-muted-foreground mb-3">您的姓名</label>
-                <input
-                  type="text"
-                  value={form.name}
-                  onChange={(e) => update("name", e.target.value)}
-                  placeholder="张先生 / 李女士"
-                  className="input-field"
-                  required
-                />
-              </div>
-              <div className="relative z-10 mt-4">
-                <label className="block text-xs font-medium text-muted-foreground mb-3">公司名称</label>
-                <input
-                  type="text"
-                  value={form.company}
-                  onChange={(e) => update("company", e.target.value)}
-                  placeholder="您的公司"
-                  className="input-field"
-                />
-              </div>
-            </div>
-
-            {/* 邮箱 - top middle */}
-            <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card border border-border/50 p-6 transition-all duration-300 hover:border-border">
+          <div className="grid auto-rows-[minmax(120px,auto)] grid-cols-1 md:grid-cols-2 gap-4">
+            {/* 邮箱 */}
+            <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card border border-border/50 p-6 md:col-span-1 transition-all duration-300 hover:border-border">
               <div className="pointer-events-none absolute inset-0 transition-all duration-300 group-hover:bg-muted/20" />
               <div className="relative z-10">
                 <Mail className="h-8 w-8 text-muted-foreground/60 mb-3 transition-all duration-300 group-hover:text-foreground group-hover:scale-90 origin-left" />
@@ -111,24 +84,8 @@ const HealthForm = ({ onSubmit }: Props) => {
               </div>
             </div>
 
-            {/* 电话 - top right */}
-            <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card border border-border/50 p-6 transition-all duration-300 hover:border-border">
-              <div className="pointer-events-none absolute inset-0 transition-all duration-300 group-hover:bg-muted/20" />
-              <div className="relative z-10">
-                <Phone className="h-8 w-8 text-muted-foreground/60 mb-3 transition-all duration-300 group-hover:text-foreground group-hover:scale-90 origin-left" />
-                <label className="block text-xs font-medium text-muted-foreground mb-3">联系电话</label>
-                <input
-                  type="tel"
-                  value={form.phone}
-                  onChange={(e) => update("phone", e.target.value)}
-                  placeholder="138 0000 0000"
-                  className="input-field"
-                />
-              </div>
-            </div>
-
             {/* 预算 - bottom middle+right span 2 */}
-            <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card border border-border/50 p-6 md:col-span-2 transition-all duration-300 hover:border-border">
+            <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card border border-border/50 p-6 md:col-span-1 transition-all duration-300 hover:border-border">
               <div className="pointer-events-none absolute inset-0 transition-all duration-300 group-hover:bg-muted/20" />
               <div className="relative z-10">
                 <Wallet className="h-8 w-8 text-muted-foreground/60 mb-3 transition-all duration-300 group-hover:text-foreground group-hover:scale-90 origin-left" />
@@ -154,7 +111,7 @@ const HealthForm = ({ onSubmit }: Props) => {
             </div>
 
             {/* 需求 - full width */}
-            <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card border border-border/50 p-6 md:col-span-3 transition-all duration-300 hover:border-border">
+            <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card border border-border/50 p-6 md:col-span-2 transition-all duration-300 hover:border-border">
               <div className="pointer-events-none absolute inset-0 transition-all duration-300 group-hover:bg-muted/20" />
               <div className="relative z-10">
                 <MessageSquare className="h-8 w-8 text-muted-foreground/60 mb-3 transition-all duration-300 group-hover:text-foreground group-hover:scale-90 origin-left" />

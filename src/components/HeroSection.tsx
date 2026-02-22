@@ -1,79 +1,42 @@
 import { motion } from "framer-motion";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
-import DisplayCards from "@/components/ui/display-cards";
+import { WebGLShader } from "@/components/ui/web-gl-shader";
 
 const HeroSection = ({ onStart }: { onStart: () => void }) => {
   return (
-    <section className="relative overflow-hidden gradient-hero">
-      <div className="max-w-6xl mx-auto px-6 pt-16 pb-8 md:pt-24 md:pb-12">
-        {/* Hero Text */}
+    <section className="relative overflow-hidden min-h-[90vh] flex items-center justify-center">
+      {/* WebGL Background */}
+      <WebGLShader />
+
+      {/* Content overlay */}
+      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.8 }}
         >
-          <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-3">
-            守护宝宝 · 健康成长
+          <p className="text-sm tracking-[0.3em] uppercase text-foreground/40 mb-6">
+            Brand Strategy Studio
+          </p>
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6 text-gradient">
+            品牌策略
           </h1>
-          <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto">
-            专为1-8岁宝宝打造的科学健康管理平台
+          <p className="text-foreground/50 text-base md:text-lg max-w-lg mx-auto mb-10 leading-relaxed">
+            以战略思维驱动品牌增长，用设计语言定义市场格局
           </p>
         </motion.div>
 
-        {/* Display Cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="flex justify-center mb-8"
-        >
-          <DisplayCards
-            cards={[
-              {
-                title: "成长追踪",
-                description: "WHO标准对比",
-                date: "实时更新",
-                titleClassName: "text-mint",
-                className:
-                  "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-              },
-              {
-                title: "营养管理",
-                description: "个性化建议",
-                date: "每日推荐",
-                titleClassName: "text-coral",
-                className:
-                  "[grid-area:stack] translate-x-16 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-              },
-              {
-                title: "拍照分析",
-                description: "智能识别食物",
-                date: "AI驱动",
-                titleClassName: "text-apricot",
-                className:
-                  "[grid-area:stack] translate-x-32 translate-y-20 hover:translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-              },
-              {
-                title: "过敏提醒",
-                description: "安全饮食守护",
-                date: "全天候",
-                titleClassName: "text-lavender",
-                className:
-                  "[grid-area:stack] translate-x-48 translate-y-[7.5rem] hover:translate-y-[5rem]",
-              },
-            ]}
-          />
-        </motion.div>
-
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="flex justify-center"
+          transition={{ delay: 0.6, duration: 0.6 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <InteractiveHoverButton onClick={onStart} text="立即开始健康评估" className="w-48 border-primary text-primary" />
+          <button onClick={onStart} className="btn-primary text-sm tracking-wide">
+            开始咨询
+          </button>
+          <button className="btn-secondary text-sm tracking-wide">
+            查看案例
+          </button>
         </motion.div>
       </div>
     </section>

@@ -50,7 +50,7 @@ const timelineData = [
 ];
 
 const FeaturesGrid = () => (
-  <section id="process" className="section-cool py-24 md:py-32">
+  <section id="process" className="bg-background py-24 md:py-32">
     <div className="max-w-5xl mx-auto px-6">
       <motion.div
         initial={{ opacity: 0, y: 16 }}

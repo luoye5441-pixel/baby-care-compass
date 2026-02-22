@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import FeaturesGrid from "@/components/FeaturesGrid";
+import BentoFeatures from "@/components/BentoFeatures";
 import HealthForm, { type BabyData } from "@/components/HealthForm";
 import HealthReportView from "@/components/HealthReport";
 import AllergenReminder from "@/components/AllergenReminder";
@@ -27,7 +27,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection onStart={handleStart} />
-      <FeaturesGrid />
+      <BentoFeatures />
       <HealthForm onSubmit={handleSubmit} />
       <div ref={reportRef}>
         {report && <HealthReportView data={report.data} report={report.report} />}

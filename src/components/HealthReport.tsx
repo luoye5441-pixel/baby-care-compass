@@ -82,7 +82,7 @@ const HealthReportView = ({ data, report }: Props) => {
         {/* Suggestions */}
         <div className="card-elevated p-6 md:p-7 mb-5">
           <h3 className="text-base font-semibold mb-4 flex items-center gap-2">
-            <span className="w-7 h-7 rounded-lg bg-mint-light flex items-center justify-center text-sm">💡</span>
+            <span className="w-7 h-7 rounded-lg bg-mint-light flex items-center justify-center text-sm font-bold text-primary">建</span>
             健康建议
           </h3>
           <div className="space-y-3">

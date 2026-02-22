@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import DisplayCards from "@/components/ui/display-cards";
 import { SplineRobot } from "@/components/SplineRobot";
+import FeaturesGrid from "@/components/FeaturesGrid";
 
 const displayCards = [
   {
@@ -62,6 +63,9 @@ export default function BentoFeatures() {
         <div className="mb-16">
           <SplineRobot />
         </div>
+
+        {/* 合作流程 */}
+        <FeaturesGrid />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

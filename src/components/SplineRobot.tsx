@@ -1,5 +1,6 @@
 import { Globe } from "@/components/ui/globe";
 import { Testimonials3D, type Testimonial } from "@/components/ui/3d-testimonials";
+import AIVoiceInput from "@/components/ui/ai-voice-input";
 
 const testimonials: Testimonial[] = [
   {
@@ -100,6 +101,11 @@ export function SplineRobot() {
             <Globe className="w-full h-full" />
           </div>
         </div>
+      </div>
+
+      {/* Voice Input */}
+      <div className="py-12">
+        <AIVoiceInput />
       </div>
 
       {/* 3D Testimonials */}

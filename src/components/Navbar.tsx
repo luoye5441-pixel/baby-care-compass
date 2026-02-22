@@ -11,22 +11,6 @@ const Navbar = () => {
         </a>
 
         <div className="hidden md:flex items-center gap-8">
-          {[
-            { href: "#services", label: "服务" },
-            { href: "#process", label: "流程" },
-            { href: "#contact", label: "联系" },
-          ].map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors tracking-wide"
-            >
-              {l.label}
-            </a>
-          ))}
-          <a href="#contact" className="btn-primary text-xs px-6 py-2.5">
-            预约咨询
-          </a>
         </div>
 
         <button onClick={() => setOpen(!open)} className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors">

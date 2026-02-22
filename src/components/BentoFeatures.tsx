@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import DisplayCards from "@/components/ui/display-cards";
+import { SplineRobot } from "@/components/SplineRobot";
 
 const displayCards = [
   {
@@ -56,6 +57,11 @@ export default function BentoFeatures() {
             从策略到执行，为品牌注入持久生命力
           </p>
         </motion.div>
+
+        {/* Spline Robot */}
+        <div className="mb-16">
+          <SplineRobot />
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

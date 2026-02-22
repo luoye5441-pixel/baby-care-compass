@@ -97,8 +97,8 @@ export function SplineRobot() {
               </div>
             </div>
           </div>
-          <div className="md:w-[60%] relative flex items-center justify-center min-h-[300px]">
-            <Globe className="w-full h-full" />
+          <div className="md:w-[70%] relative flex items-center justify-center min-h-[350px]">
+            <Globe className="w-[120%] h-[120%]" />
           </div>
         </div>
       </div>

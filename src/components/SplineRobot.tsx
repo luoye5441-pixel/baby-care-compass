@@ -81,6 +81,20 @@ export function SplineRobot() {
             <p className="mt-4 md:mt-6 text-muted-foreground max-w-lg text-base md:text-lg leading-relaxed">
               全球来自 20 个不同国家的人工团队，结合 AI 智能分析，为品牌提供跨文化、全方位的策略支持。
             </p>
+            <div className="mt-8 grid grid-cols-3 gap-6 max-w-md">
+              <div>
+                <p className="text-2xl md:text-3xl font-bold text-foreground">20+</p>
+                <p className="text-xs text-muted-foreground mt-1">覆盖国家</p>
+              </div>
+              <div>
+                <p className="text-2xl md:text-3xl font-bold text-foreground">500+</p>
+                <p className="text-xs text-muted-foreground mt-1">服务品牌</p>
+              </div>
+              <div>
+                <p className="text-2xl md:text-3xl font-bold text-foreground">98%</p>
+                <p className="text-xs text-muted-foreground mt-1">客户满意度</p>
+              </div>
+            </div>
           </div>
           <div className="flex-1 relative flex items-center justify-center min-h-[250px]">
             <Globe className="w-full h-full" />

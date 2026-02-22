@@ -79,21 +79,30 @@ export function SplineRobot() {
             <h2 className="font-display text-2xl md:text-3xl font-bold text-gradient">
               AI+专业团队驱动
             </h2>
+            <p className="text-xs md:text-sm text-muted-foreground/70 font-medium tracking-wide mt-1">
+              AI + Professional Team Driven
+            </p>
             <p className="mt-3 md:mt-4 text-muted-foreground max-w-sm text-sm md:text-base leading-relaxed">
               全球来自 20 个不同国家的人工团队，结合 AI 智能分析，为品牌提供跨文化、全方位的策略支持。
+            </p>
+            <p className="mt-1 text-muted-foreground/60 max-w-sm text-xs md:text-sm leading-relaxed">
+              A global team from 20+ countries, combined with AI-powered analytics, providing cross-cultural and comprehensive brand strategy support.
             </p>
             <div className="mt-6 grid grid-cols-3 gap-4 max-w-xs">
               <div>
                 <p className="text-xl md:text-2xl font-bold text-foreground">20+</p>
                 <p className="text-xs text-muted-foreground mt-1">覆盖国家</p>
+                <p className="text-[10px] text-muted-foreground/60">Countries</p>
               </div>
               <div>
                 <p className="text-xl md:text-2xl font-bold text-foreground">500+</p>
                 <p className="text-xs text-muted-foreground mt-1">服务品牌</p>
+                <p className="text-[10px] text-muted-foreground/60">Brands</p>
               </div>
               <div>
                 <p className="text-xl md:text-2xl font-bold text-foreground">98%</p>
                 <p className="text-xs text-muted-foreground mt-1">客户满意度</p>
+                <p className="text-[10px] text-muted-foreground/60">Satisfaction</p>
               </div>
             </div>
           </div>

@@ -112,3 +112,8 @@
     @apply w-full px-4 py-3.5 rounded-xl bg-muted border border-border focus:ring-2 focus:ring-ring/20 focus:border-foreground/30 outline-none transition-all text-sm;
   }
 }
+
+@keyframes pulse {
+  0% { transform: scaleY(0.3); }
+  100% { transform: scaleY(1); }
+}

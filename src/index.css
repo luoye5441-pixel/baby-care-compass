@@ -148,7 +148,7 @@
     hsl(140 80% 55%),
     hsl(220 90% 60%)
   );
-  opacity: 0;
+  opacity: 0.35;
   transition: opacity var(--transition) ease;
   z-index: 0;
   animation: spin var(--spark) linear infinite;

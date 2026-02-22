@@ -1,58 +1,80 @@
 import { Globe } from "@/components/ui/globe";
-import { Marquee, TestimonialCard } from "@/components/ui/3d-testimonials";
+import { Testimonials3D, type Testimonial } from "@/components/ui/3d-testimonials";
 
-const teamMembers = [
+const testimonials: Testimonial[] = [
   {
     name: "林小雨",
-    role: "UI 设计师",
-    quote: "每个像素都承载着品牌的温度，设计不只是美观，更是与用户的无声对话。",
-    avatar: "🎨",
+    username: "@xiaoyu",
+    body: "专业的UI设计让品牌焕然一新，每个细节都恰到好处。",
+    img: "https://randomuser.me/api/portraits/women/32.jpg",
+    country: "🇨🇳",
   },
   {
     name: "张明辉",
-    role: "动效设计师",
-    quote: "好的动效能让界面活起来，让用户在交互中感受到品牌的活力与个性。",
-    avatar: "✨",
+    username: "@minghui",
+    body: "动效设计让整个品牌体验提升了一个层级，用户反馈非常好。",
+    img: "https://randomuser.me/api/portraits/men/45.jpg",
+    country: "🇨🇳",
   },
   {
-    name: "王子轩",
-    role: "视频剪辑师",
-    quote: "每一帧画面都是故事的一部分，剪辑是赋予品牌叙事节奏感的艺术。",
-    avatar: "🎬",
+    name: "Carlos Ray",
+    username: "@carl",
+    body: "Great for testimonials and logos. The team delivered beyond expectations.",
+    img: "https://randomuser.me/api/portraits/men/52.jpg",
+    country: "🇪🇸",
   },
   {
     name: "陈思琪",
-    role: "产品经理",
-    quote: "从用户需求出发，用数据验证假设，让每个功能都精准命中品牌目标。",
-    avatar: "📊",
+    username: "@siqi",
+    body: "产品经理视角出发，每个功能都精准命中品牌目标，效率极高。",
+    img: "https://randomuser.me/api/portraits/women/44.jpg",
+    country: "🇨🇳",
   },
   {
-    name: "李佳怡",
-    role: "品牌策略师",
-    quote: "品牌不只是一个标志，它是企业与消费者之间最有力的情感纽带。",
-    avatar: "💡",
+    name: "Emma Lee",
+    username: "@emma",
+    body: "Love the pause on hover feature! The 3D effect is stunning.",
+    img: "https://randomuser.me/api/portraits/women/68.jpg",
+    country: "🇨🇦",
+  },
+  {
+    name: "Ava Green",
+    username: "@ava",
+    body: "Cascade AI made my workflow 10x faster! Incredible team support.",
+    img: "https://randomuser.me/api/portraits/women/12.jpg",
+    country: "🇦🇺",
+  },
+  {
+    name: "王子轩",
+    username: "@zixuan",
+    body: "视频剪辑出品质量极高，完美呈现品牌故事的每一个细节。",
+    img: "https://randomuser.me/api/portraits/men/22.jpg",
+    country: "🇨🇳",
+  },
+  {
+    name: "Ana Miller",
+    username: "@ana",
+    body: "Vertical marquee is a game changer! Perfect for our landing page.",
+    img: "https://randomuser.me/api/portraits/women/56.jpg",
+    country: "🇩🇪",
   },
   {
     name: "赵天宇",
-    role: "前端工程师",
-    quote: "代码是品牌数字体验的基石，性能与美感缺一不可。",
-    avatar: "⚡",
+    username: "@tianyu",
+    body: "前端开发质量一流，性能与美感完美兼顾，合作非常愉快。",
+    img: "https://randomuser.me/api/portraits/men/36.jpg",
+    country: "🇨🇳",
   },
 ];
-
-const row1 = teamMembers.slice(0, 3);
-const row2 = teamMembers.slice(3);
 
 export function SplineRobot() {
   return (
     <div className="w-full max-w-6xl mx-auto space-y-8">
       {/* AI + Team Section - Enlarged */}
       <div className="h-[560px] relative overflow-hidden rounded-lg border border-border bg-card">
-        {/* Ambient glow */}
         <div className="absolute top-1/2 left-2/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.08)_0%,rgba(99,102,241,0.04)_40%,transparent_70%)]" />
 
         <div className="flex h-full">
-          {/* Left content */}
           <div className="flex-1 p-10 md:p-16 relative z-10 flex flex-col justify-center">
             <h2 className="font-display text-4xl md:text-5xl font-bold text-gradient whitespace-nowrap">
               AI+专业团队驱动
@@ -61,30 +83,15 @@ export function SplineRobot() {
               全球来自 20 个不同国家的人工团队，结合 AI 智能分析，为品牌提供跨文化、全方位的策略支持。
             </p>
           </div>
-
-          {/* Right content - Globe */}
           <div className="flex-1 relative flex items-center justify-center">
             <Globe className="w-full h-full" />
           </div>
         </div>
       </div>
 
-      {/* 3D Testimonials Marquee */}
-      <div className="relative overflow-hidden">
-        <Marquee pauseOnHover className="[--duration:30s]">
-          {row1.map((member) => (
-            <TestimonialCard key={member.name} member={member} />
-          ))}
-        </Marquee>
-        <Marquee reverse pauseOnHover className="[--duration:35s] mt-4">
-          {row2.map((member) => (
-            <TestimonialCard key={member.name} member={member} />
-          ))}
-        </Marquee>
-
-        {/* Fade edges */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent" />
+      {/* 3D Testimonials */}
+      <div className="h-[500px] overflow-hidden">
+        <Testimonials3D testimonials={testimonials} />
       </div>
     </div>
   );

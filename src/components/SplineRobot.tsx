@@ -12,7 +12,7 @@ export function SplineRobot() {
           <h2 className="font-display text-3xl md:text-4xl font-bold text-gradient whitespace-nowrap">
             AI+专业团队驱动
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-md text-sm leading-relaxed">
+          <p className="mt-4 text-muted-foreground max-w-md text-base md:text-lg leading-relaxed">
             全球来自 20 个不同国家的人工团队，结合 AI 智能分析，为品牌提供跨文化、全方位的策略支持。
           </p>
         </div>

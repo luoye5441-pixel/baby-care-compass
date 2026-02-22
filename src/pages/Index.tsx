@@ -38,7 +38,6 @@ const Index = () => {
       <footer className="py-12 px-6 border-t border-border/40">
         <div className="max-w-6xl mx-auto text-center">
           <div className="flex items-center justify-center gap-2 mb-3">
-            <span className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-sm text-primary-foreground font-bold">宝</span>
             <span className="font-semibold text-sm">宝贝健康</span>
           </div>
           <p className="text-xs text-muted-foreground mb-1">© 2026 宝贝健康 · 守护每一步成长</p>

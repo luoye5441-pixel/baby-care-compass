@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { User, Building2, Mail, Phone, Wallet, MessageSquare, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 
 export interface BabyData {
   name: string;
@@ -169,10 +170,10 @@ const HealthForm = ({ onSubmit }: Props) => {
             </div>
           </div>
 
-          <button type="submit" className="btn-primary w-full text-sm py-4 mt-6">
+          <RainbowButton type="submit" className="w-full text-sm py-4 mt-6">
             <Send className="w-4 h-4" />
             提交咨询
-          </button>
+          </RainbowButton>
         </form>
       </div>
     </motion.section>

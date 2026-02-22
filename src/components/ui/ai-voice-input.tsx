@@ -1,14 +1,24 @@
 "use client";
 
 import { Mic } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
+
+import voice1 from "@/assets/voice-1.mp3";
+import voice2 from "@/assets/voice-2.mp3";
+import voice3 from "@/assets/voice-3.mp3";
+import voice4 from "@/assets/voice-4.mp3";
+
+const voiceFiles = [voice1, voice2, voice3, voice4];
 
 export default function AIVoiceInput() {
   const [submitted, setSubmitted] = useState(false);
   const [time, setTime] = useState(0);
   const [isClient, setIsClient] = useState(false);
-  const [isDemo, setIsDemo] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const playIndexRef = useRef(0);
+  const cancelledRef = useRef(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -36,31 +46,50 @@ export default function AIVoiceInput() {
       .padStart(2, "0")}`;
   };
 
-  useEffect(() => {
-    if (!isDemo) return;
+  const playSequence = useCallback(async () => {
+    cancelledRef.current = false;
+    setIsPlaying(true);
+    setSubmitted(true);
 
-    let timeoutId: ReturnType<typeof setTimeout>;
-    const runAnimation = () => {
-      setSubmitted(true);
-      timeoutId = setTimeout(() => {
-        setSubmitted(false);
-        timeoutId = setTimeout(runAnimation, 1000);
-      }, 3000);
-    };
+    for (let i = 0; i < voiceFiles.length; i++) {
+      if (cancelledRef.current) break;
+      playIndexRef.current = i;
 
-    const initialTimeout = setTimeout(runAnimation, 100);
-    return () => {
-      clearTimeout(timeoutId);
-      clearTimeout(initialTimeout);
-    };
-  }, [isDemo]);
+      const audio = new Audio(voiceFiles[i]);
+      audioRef.current = audio;
+
+      await new Promise<void>((resolve) => {
+        audio.onended = () => resolve();
+        audio.onerror = () => resolve();
+        audio.play().catch(() => resolve());
+      });
+
+      // 1s gap between clips (skip after last)
+      if (i < voiceFiles.length - 1 && !cancelledRef.current) {
+        await new Promise((r) => setTimeout(r, 1000));
+      }
+    }
+
+    setIsPlaying(false);
+    setSubmitted(false);
+    audioRef.current = null;
+  }, []);
+
+  const stopPlayback = useCallback(() => {
+    cancelledRef.current = true;
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+    setIsPlaying(false);
+    setSubmitted(false);
+  }, []);
 
   const handleClick = () => {
-    if (isDemo) {
-      setIsDemo(false);
-      setSubmitted(false);
+    if (isPlaying) {
+      stopPlayback();
     } else {
-      setSubmitted((prev) => !prev);
+      playSequence();
     }
   };
 

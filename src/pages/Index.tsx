@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import BentoFeatures from "@/components/BentoFeatures";
+import FeaturesGrid from "@/components/FeaturesGrid";
 
 import HealthForm, { type BabyData } from "@/components/HealthForm";
 import { generateReport, type HealthReport } from "@/lib/healthUtils";
@@ -27,6 +28,7 @@ const Index = () => {
       <Navbar />
       <HeroSection onStart={handleStart} />
       <BentoFeatures />
+      <FeaturesGrid />
       
       <HealthForm onSubmit={handleSubmit} />
 

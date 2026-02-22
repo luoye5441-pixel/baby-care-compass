@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -27,8 +28,8 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
-          <a href="#health-form" className="ml-3 btn-primary text-sm !py-2.5 !px-6">
-            开始评估
+          <a href="#health-form" className="ml-3">
+            <InteractiveHoverButton text="开始评估" className="w-28 text-xs border-primary text-primary" />
           </a>
         </div>
 

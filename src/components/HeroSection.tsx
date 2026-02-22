@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import heroBanner from "@/assets/hero-banner.jpg";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 const HeroSection = ({ onStart }: { onStart: () => void }) => {
   return (
@@ -69,12 +70,7 @@ const HeroSection = ({ onStart }: { onStart: () => void }) => {
           transition={{ delay: 0.8 }}
           className="flex justify-center"
         >
-          <button onClick={onStart} className="btn-primary text-base px-10 py-4">
-            立即开始健康评估
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-              <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+          <InteractiveHoverButton onClick={onStart} text="立即开始健康评估" className="w-48 border-primary text-primary" />
         </motion.div>
       </div>
     </section>

@@ -9,7 +9,7 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-3.5">
         <a href="/" className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold shadow-sm">
-            🌱
+            宝
           </div>
           <span className="text-lg font-bold tracking-tight">宝贝健康</span>
         </a>

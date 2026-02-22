@@ -72,8 +72,8 @@ const HealthForm = ({ onSubmit }: Props) => {
             <label className="block text-xs font-medium text-muted-foreground mb-2">性别</label>
             <div className="grid grid-cols-2 gap-3">
               {[
-                { value: "male" as const, label: "👦 男宝", bg: "bg-mint-light border-primary" },
-                { value: "female" as const, label: "👧 女宝", bg: "bg-coral-light border-secondary" },
+                { value: "male" as const, label: "男宝", bg: "bg-mint-light border-primary" },
+                { value: "female" as const, label: "女宝", bg: "bg-coral-light border-secondary" },
               ].map((opt) => (
                 <button
                   type="button"
@@ -169,7 +169,7 @@ const HealthForm = ({ onSubmit }: Props) => {
           {/* 提交按钮 - Full width */}
           <div className="md:col-span-6">
             <button type="submit" className="btn-primary w-full text-base py-4">
-              🔍 生成健康报告
+              生成健康报告
             </button>
           </div>
         </form>

@@ -71,7 +71,7 @@ export function SplineRobot() {
   return (
     <div className="w-full max-w-6xl mx-auto space-y-8">
       {/* AI + Team Section */}
-      <div className="min-h-[400px] md:h-[560px] relative overflow-hidden rounded-lg border border-border bg-card">
+      <div className="min-h-[400px] md:h-[560px] relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 md:left-2/3 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[600px] h-[400px] md:h-[600px] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.08)_0%,rgba(99,102,241,0.04)_40%,transparent_70%)]" />
         <div className="flex flex-col md:flex-row h-full">
           <div className="flex-1 p-8 md:p-16 relative z-10 flex flex-col justify-center">

@@ -53,23 +53,6 @@ const FeaturesGrid = () => (
   <section id="process" className="bg-background py-24 md:py-32">
     <div className="max-w-5xl mx-auto px-6">
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-8"
-      >
-        <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">
-          Our Process
-        </p>
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-gradient mb-4">
-          合作流程
-        </h2>
-        <p className="text-muted-foreground text-sm max-w-md mx-auto">
-          系统化的品牌建设方法论，确保每一步精准高效
-        </p>
-      </motion.div>
-
-      <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}

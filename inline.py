@@ -98,6 +98,19 @@ html = f"""<!doctype html>
   <body>
     <div id="root"></div>
     <script>
+      // Ensure HashRouter has a valid hash path
+      if (!window.location.hash || window.location.hash === '#') {{
+        window.location.hash = '#/';
+      }}
+      // Show errors on screen for mobile debugging
+      window.onerror = function(msg, src, line, col, err) {{
+        var d = document.createElement('pre');
+        d.style.cssText = 'position:fixed;top:0;left:0;right:0;background:red;color:white;padding:16px;z-index:99999;font-size:14px;white-space:pre-wrap;word-break:break-all;';
+        d.textContent = 'JS Error: ' + msg + '\\nLine: ' + line + ':' + col + '\\n' + (err && err.stack || '');
+        document.body.appendChild(d);
+      }};
+    </script>
+    <script>
 {js_content}
     </script>
   </body>

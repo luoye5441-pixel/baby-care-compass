@@ -14,7 +14,7 @@ OUTPUT_FILE = "/home/user/baby-care-compass/offline.html"
 with open(os.path.join(ASSETS_DIR, "index-DxaAu5NI.css"), "r") as f:
     css_content = f.read()
 
-with open(os.path.join(ASSETS_DIR, "index-Ai7_5U54.js"), "r") as f:
+with open(os.path.join(ASSETS_DIR, "index-BQB2I9s3.js"), "r") as f:
     js_content = f.read()
 
 # Convert audio files to base64 data URIs and replace references in JS

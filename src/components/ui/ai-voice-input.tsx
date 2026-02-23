@@ -46,6 +46,18 @@ export default function AIVoiceInput() {
       .padStart(2, "0")}`;
   };
 
+  const safePlay = useCallback((audio: HTMLAudioElement, onFail?: () => void) => {
+    try {
+      const result = audio.play();
+      // Some Android browsers return undefined instead of a Promise
+      if (result && typeof result.catch === "function") {
+        result.catch(() => { if (onFail) onFail(); });
+      }
+    } catch {
+      if (onFail) onFail();
+    }
+  }, []);
+
   const playSequence = useCallback(() => {
     cancelledRef.current = false;
     setIsPlaying(true);
@@ -58,44 +70,41 @@ export default function AIVoiceInput() {
     const audio = audioRef.current || new Audio();
     audioRef.current = audio;
     audio.src = voiceFiles[0];
+    audio.load();
 
-    const playNext = () => {
-      const idx = playIndexRef.current;
-      if (cancelledRef.current || idx >= voiceFiles.length) {
-        setIsPlaying(false);
-        setSubmitted(false);
-        return;
-      }
-      audio.src = voiceFiles[idx];
-      audio.load();
-      audio.play().catch(() => {
-        setIsPlaying(false);
-        setSubmitted(false);
-      });
+    const finish = () => {
+      setIsPlaying(false);
+      setSubmitted(false);
     };
 
     audio.onended = () => {
       playIndexRef.current += 1;
       if (cancelledRef.current || playIndexRef.current >= voiceFiles.length) {
-        setIsPlaying(false);
-        setSubmitted(false);
+        finish();
         return;
       }
-      // 1s gap between clips
-      setTimeout(playNext, 1000);
+      // Play next clip IMMEDIATELY in onended — no setTimeout!
+      // Using setTimeout breaks the audio permission chain on iOS Safari,
+      // causing only the first clip to play.
+      audio.src = voiceFiles[playIndexRef.current];
+      audio.load();
+      safePlay(audio, finish);
     };
 
     audio.onerror = () => {
       playIndexRef.current += 1;
-      playNext();
+      if (cancelledRef.current || playIndexRef.current >= voiceFiles.length) {
+        finish();
+        return;
+      }
+      audio.src = voiceFiles[playIndexRef.current];
+      audio.load();
+      safePlay(audio, finish);
     };
 
     // Start first clip immediately (within user gesture)
-    audio.play().catch(() => {
-      setIsPlaying(false);
-      setSubmitted(false);
-    });
-  }, []);
+    safePlay(audio, finish);
+  }, [safePlay]);
 
   const stopPlayback = useCallback(() => {
     cancelledRef.current = true;

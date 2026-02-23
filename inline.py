@@ -98,17 +98,40 @@ html = f"""<!doctype html>
   <body>
     <div id="root"></div>
     <script>
+      // Patch URL constructor for non-standard protocols (WeChat content://, file://, etc.)
+      // react-router calls new URL(path, base) where base can be window.location.href.
+      // In WeChat file viewer the href is content://... which is not a valid URL base.
+      (function() {{
+        var OrigURL = URL;
+        function PatchedURL(url, base) {{
+          try {{
+            return new OrigURL(url, base);
+          }} catch (e) {{
+            // If base is a non-http protocol, fall back to http://localhost
+            if (base !== undefined) {{
+              try {{
+                return new OrigURL(url, 'http://localhost');
+              }} catch (e2) {{}}
+            }}
+            // If url itself is non-standard, try with a safe base
+            if (typeof url === 'string' && url.indexOf('://') === -1) {{
+              try {{
+                return new OrigURL(url, 'http://localhost');
+              }} catch (e3) {{}}
+            }}
+            throw e;
+          }}
+        }}
+        PatchedURL.prototype = OrigURL.prototype;
+        PatchedURL.createObjectURL = OrigURL.createObjectURL;
+        PatchedURL.revokeObjectURL = OrigURL.revokeObjectURL;
+        window.URL = PatchedURL;
+      }})();
+
       // Ensure HashRouter has a valid hash path
       if (!window.location.hash || window.location.hash === '#') {{
         window.location.hash = '#/';
       }}
-      // Show errors on screen for mobile debugging
-      window.onerror = function(msg, src, line, col, err) {{
-        var d = document.createElement('pre');
-        d.style.cssText = 'position:fixed;top:0;left:0;right:0;background:red;color:white;padding:16px;z-index:99999;font-size:14px;white-space:pre-wrap;word-break:break-all;';
-        d.textContent = 'JS Error: ' + msg + '\\nLine: ' + line + ':' + col + '\\n' + (err && err.stack || '');
-        document.body.appendChild(d);
-      }};
     </script>
     <script>
 {js_content}

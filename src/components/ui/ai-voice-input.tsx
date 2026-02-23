@@ -46,40 +46,63 @@ export default function AIVoiceInput() {
       .padStart(2, "0")}`;
   };
 
-  const playSequence = useCallback(async () => {
+  const playSequence = useCallback(() => {
     cancelledRef.current = false;
     setIsPlaying(true);
     setSubmitted(true);
+    playIndexRef.current = 0;
 
-    for (let i = 0; i < voiceFiles.length; i++) {
-      if (cancelledRef.current) break;
-      playIndexRef.current = i;
+    // Reuse a single Audio element for mobile compatibility.
+    // Mobile browsers only allow play() from a direct user gesture;
+    // creating new Audio objects in async callbacks gets blocked.
+    const audio = audioRef.current || new Audio();
+    audioRef.current = audio;
+    audio.src = voiceFiles[0];
 
-      const audio = new Audio(voiceFiles[i]);
-      audioRef.current = audio;
-
-      await new Promise<void>((resolve) => {
-        audio.onended = () => resolve();
-        audio.onerror = () => resolve();
-        audio.play().catch(() => resolve());
-      });
-
-      // 1s gap between clips (skip after last)
-      if (i < voiceFiles.length - 1 && !cancelledRef.current) {
-        await new Promise((r) => setTimeout(r, 1000));
+    const playNext = () => {
+      const idx = playIndexRef.current;
+      if (cancelledRef.current || idx >= voiceFiles.length) {
+        setIsPlaying(false);
+        setSubmitted(false);
+        return;
       }
-    }
+      audio.src = voiceFiles[idx];
+      audio.load();
+      audio.play().catch(() => {
+        setIsPlaying(false);
+        setSubmitted(false);
+      });
+    };
 
-    setIsPlaying(false);
-    setSubmitted(false);
-    audioRef.current = null;
+    audio.onended = () => {
+      playIndexRef.current += 1;
+      if (cancelledRef.current || playIndexRef.current >= voiceFiles.length) {
+        setIsPlaying(false);
+        setSubmitted(false);
+        return;
+      }
+      // 1s gap between clips
+      setTimeout(playNext, 1000);
+    };
+
+    audio.onerror = () => {
+      playIndexRef.current += 1;
+      playNext();
+    };
+
+    // Start first clip immediately (within user gesture)
+    audio.play().catch(() => {
+      setIsPlaying(false);
+      setSubmitted(false);
+    });
   }, []);
 
   const stopPlayback = useCallback(() => {
     cancelledRef.current = true;
     if (audioRef.current) {
       audioRef.current.pause();
-      audioRef.current = null;
+      audioRef.current.onended = null;
+      audioRef.current.onerror = null;
     }
     setIsPlaying(false);
     setSubmitted(false);
